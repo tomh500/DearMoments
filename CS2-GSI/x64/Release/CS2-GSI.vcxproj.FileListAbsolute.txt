@@ -1,0 +1,2 @@
+D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\DearMoments\cpp\CS2-GSI\x64\Release\SDL2.dll
+D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\DearMoments\cpp\CS2-GSI\CS2-GSI\x64\Release\CS2-GSI.vcxproj.Up2Date
