@@ -91,3 +91,6 @@ bool PreloadFlashImage(SDL_Renderer* renderer, const std::string& path);
 void FreeFlashResources();
 extern std::unordered_map<int, Mix_Chunk*> sound_map;
 extern std::unordered_map<int, std::string> sound_file_map;
+extern void BombChannelFinished(int channel);
+extern std::atomic<bool> bomb_sound_playing;
+extern bool ShowMVP;

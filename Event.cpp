@@ -23,6 +23,7 @@
 #include <fcntl.h>
 #endif
 
+#include "OverlayMVP.h"
 #include <simdjson.h> // 添加 SIMDJSON 库
 
 // 热点字段快速提取函数
@@ -108,16 +109,47 @@ static std::atomic<bool> is_number_sound_playing{ false };
 // 全局变量，用于保存炸弹音效通道
 std::atomic<int> bomb_channel{ -1 };
 
-// 播放炸弹音效时，记录通道
-void PlayBombSound(const fs::path& sound_file, float vol) {
-    // 这里直接播放炸弹音效，记录通道
-    int channel = Mix_PlayChannel(-1, Mix_LoadWAV(sound_file.string().c_str()), 0);
-    if (channel != -1) {
-        bomb_channel = channel;
-        Mix_Volume(channel, static_cast<int>(MIX_MAX_VOLUME * vol));
+// 在全局区域添加：
+void BombChannelFinished(int channel) {
+    if (channel == bomb_channel) {
+        bomb_channel = -1;
+        bomb_sound_playing = false;
+        if (debug_mode) {
+            std::cout << "[BOMB] Bomb sound finished on channel " << channel << "\n";
+        }
     }
 }
 
+
+// 播放炸弹音效时，记录通道
+void PlayBombSound(const fs::path& sound_file, float vol) {
+    // 确保只有一个炸弹音效在播放
+    StopBombSound();
+
+    Mix_Chunk* chunk = Mix_LoadWAV(sound_file.string().c_str());
+    if (!chunk) {
+        std::cerr << "Failed to load bomb sound: " << Mix_GetError() << std::endl;
+        return;
+    }
+
+    int channel = Mix_PlayChannel(-1, chunk, 0);
+    if (channel == -1) {
+        std::cerr << "Failed to play bomb sound: " << Mix_GetError() << std::endl;
+        Mix_FreeChunk(chunk);
+        return;
+    }
+
+    bomb_channel = channel;
+    Mix_Volume(channel, static_cast<int>(MIX_MAX_VOLUME * vol));
+    bomb_sound_playing = true;
+
+    if (debug_mode) {
+        std::cout << "[BOMB] Playing bomb sound on channel " << channel << "\n";
+    }
+
+    // 设置回调在音效结束时自动清理
+    // 注意：需要实现BombChannelFinished函数
+}
 
 // 停止所有声音
 void StopAllSounds() {
@@ -333,6 +365,7 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
             player_team = std::string(player["team"].get_string().value());
         }
 
+    
         // MVP 数
         int current_mvps = 0;
         if (player.is_object()) {
@@ -342,26 +375,6 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
                     current_mvps = int(match_stats["mvps"].get_int64().value());
                 }
             }
-        }
-
-        // 检测MVP状态 - 修复1: 使用更可靠的方法
-        bool is_mvp_this_round = false;
-        if (doc["mvp"].is_bool()) {
-            is_mvp_this_round = doc["mvp"].get_bool().value();
-        }
-        else if (player.is_object() && player["mvp"].is_bool()) {
-            is_mvp_this_round = player["mvp"].get_bool().value();
-        }
-        else {
-            static int prev_mvps = 0;
-            if (steamid_in_list == 1 && current_mvps > prev_mvps) {
-                is_mvp_this_round = true;
-                if (debug_mode) {
-                    std::cout << "[MVP] Inferred from MVP count increase: "
-                        << prev_mvps << " → " << current_mvps << "\n";
-                }
-            }
-            prev_mvps = current_mvps;
         }
 
         // 胜负字段 - 修复2: 统一检测方法
@@ -389,6 +402,8 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
         }
 
         bool mvp_pushed = false;  // 本次是否已推送 MVP 音效
+        static int mvps_at_round_start = 0; // 新增：保存回合开始时的MVP数
+        static bool mvp_pushed_this_round = false; // 新增：避免一个回合重复推送
 
         // ✅ 五杀音效推送（优先级最高）
         if (round_kills == 5 && !dead_muted) {
@@ -398,73 +413,38 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
                 std::cout << "[KILL] Five kill pushed\n";
         }
 
-        // ✅ MVP 处理 - 修复3: 简化条件并确保在回合结束时处理
-        if (custom_musickit && (phase == "over" || phase == "gameover")) {
-            std::lock_guard<std::mutex> lock(queue_mutex);
-
-            // 关键修复: 简化MVP条件
-            if (is_mvp_this_round &&
-                steamid_in_list == 1 &&
-                win_team == player_team)
-            {
-                kills_queue.push(-2);  // MVP 音效
-                if (debug_mode) {
-                    std::cout << "[CUSTOM KIT] MVP pushed (VALIDATED: "
-                        << "is_mvp=" << is_mvp_this_round
-                        << ", steamid_match=" << steamid_in_list
-                        << ", win_team=" << win_team
-                        << ", player_team=" << player_team
-                        << ")\n";
-                }
-                mvp_counts = current_mvps;
-                mvp_pushed = true;
-            }
-            else if (debug_mode && steamid_in_list == 1) {
-                std::cout << "[CUSTOM KIT] MVP skip conditions: "
-                    << "is_mvp=" << is_mvp_this_round
-                    << ", steamid_match=" << steamid_in_list
-                    << ", win_team=" << (has_win_team ? win_team : "N/A")
-                    << ", player_team=" << player_team
-                    << ", mvps_diff=" << (current_mvps - mvp_counts)
-                    << ", deaths=" << deathcounts_rd << "\n";
-            }
-        }
-
-        if (phase == "gameover" && gameover_pushed == false)
-        {
-            kills_queue.push(-19);  // 音效
-            gameover_pushed = true;
-        }
-
-        // ✅ 胜负音效推送，仅当未推送 MVP 音效时 - 修复4: 确保正确判断胜负
-        if (!mvp_pushed && custom_musickit && has_win_team && (phase == "over" || phase == "gameover")) {
-            // 直接使用已知的赢家队伍信息
-            bool we_won = (win_team == player_team);
-
-            std::lock_guard<std::mutex> lock(queue_mutex);
-            if (we_won) {
-                kills_queue.push(-3);
-                if (debug_mode)
-                    std::cout << "[CUSTOM KIT] WIN pushed\n";
-            }
-            else {
-                kills_queue.push(-4);
-                if (debug_mode)
-                    std::cout << "[CUSTOM KIT] LOSE pushed\n";
-            }
-        }
-
-        // ✅ 阶段切换逻辑
+        // 阶段切换逻辑
         if (phase != last_phase) {
             if (debug_mode)
                 std::cout << "[PHASE] " << last_phase << " → " << phase << "\n";
 
+
+            // 替换为：
             if (phase == "freezetime" && last_phase != "freezetime") {
+                // 检查炸弹音效是否正在播放
+                int bomb_ch = bomb_channel.load();
+                if (bomb_ch >= 0 && Mix_Playing(bomb_ch)) {
+                    if (debug_mode) {
+                        std::cout << "[BOMB] Sound is playing, waiting to finish before playing buy sound\n";
+                    }
+
+                    // 等待炸弹音效结束
+                    while (bomb_ch >= 0 && Mix_Playing(bomb_ch)) {
+                        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                        bomb_ch = bomb_channel.load();
+                    }
+                }
+
+                // 确保停止所有可能的炸弹音效
                 StopBombSound();
+                StopAllSounds();
+
+                // 播放buy音效
                 std::lock_guard<std::mutex> lock(queue_mutex);
-                kills_queue.push(-14);  // 购买阶段
-                if (debug_mode)
-                    std::cout << "[BUY TIME] Pushed -14\n";
+                kills_queue.push(-14);
+                if (debug_mode) {
+                    std::cout << "[BUY TIME] Pushed -14 after bomb sound finished\n";
+                }
             }
 
             if (phase == "live" && waiting_for_live) {
@@ -473,6 +453,7 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
                     std::lock_guard<std::mutex> lock(queue_mutex);
                     kills_queue.push(-13);  // 回合开始
                 }
+                HideShowMVP();
                 gameover_pushed = false;
                 deathcounts_rd = 0;
                 temp_disable_ace_when_mvp = false;
@@ -484,10 +465,7 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
                 dead_muted = false;
                 last_kills = 0;
                 round_started = true;
-                // 仅当玩家在列表中时重置MVP计数
-                if (steamid_in_list == 1) {
-                    mvp_counts = current_mvps;
-                }
+
                 temp_to_disable_count_mvp = false;
                 bomb_planted_this_round = false;
 
@@ -506,6 +484,13 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
                 if (debug_mode)
                     std::cout << "[RESET] New live, scores: CT=" << round_score_ct
                     << ", T=" << round_score_t << "\n";
+
+                // 仅当玩家在列表中时重置MVP计数
+                // 在 live 阶段开始时，记录当前 MVP 数量
+                if (steamid_in_list == 1) {
+                    mvps_at_round_start = current_mvps;
+                }
+                mvp_pushed_this_round = false;
             }
 
             if (phase != "live") {
@@ -514,6 +499,56 @@ void ReceiveData(httplib::Server* svr, bool match, float vol, bool debug_mode) {
             }
 
             last_phase = phase;
+        }
+
+        // ✅ MVP 处理 - 修复3: 简化条件并确保在回合结束时处理
+     // 检查MVP条件，只有在回合结束且MVP音效尚未推送时执行
+        if (!mvp_pushed_this_round && custom_musickit && (phase == "over" || phase == "gameover")) {
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            bool is_mvp = false;
+
+            // 条件1: MVP数量比回合开始时多
+            if (steamid_in_list == 1 && current_mvps > mvps_at_round_start) {
+                is_mvp = true;
+            }
+            // 条件2: 本回合击杀数 >=3 且本方获胜
+            if (has_win_team && win_team == player_team && mvp_candidate_kills >= 3) {
+                is_mvp = true;
+            }
+
+            if (is_mvp) {
+                kills_queue.push(-2);  // MVP 音效
+                if (ShowMVP) {
+                    ShowMvpOverlay();
+                }
+                mvp_pushed_this_round = true; // 标记本回合已推送
+                if (debug_mode) {
+                    std::cout << "[CUSTOM KIT] MVP pushed because conditions met.\n";
+                }
+            }
+            else if (debug_mode && steamid_in_list == 1) {
+                std::cout << "[CUSTOM KIT] MVP skip conditions: "
+                    << "MVP count increase: " << (current_mvps > mvps_at_round_start)
+                    << ", 3+ kills & win: " << (has_win_team && win_team == player_team && mvp_candidate_kills >= 3)
+                    << "\n";
+            }
+        }
+
+        // ✅ 胜负音效推送，仅当未推送 MVP 音效时 - 修复4: 确保正确判断胜负
+        if (!mvp_pushed_this_round && custom_musickit && has_win_team && (phase == "over" || phase == "gameover")) {
+            // 直接使用已知的赢家队伍信息
+            bool we_won = (win_team == player_team);
+            std::lock_guard<std::mutex> lock(queue_mutex);
+            if (we_won) {
+                kills_queue.push(-3);
+                if (debug_mode)
+                    std::cout << "[CUSTOM KIT] WIN pushed\n";
+            }
+            else {
+                kills_queue.push(-4);
+                if (debug_mode)
+                    std::cout << "[CUSTOM KIT] LOSE pushed\n";
+            }
         }
 
         if (custom_musickit && phase == "live") {

@@ -26,7 +26,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #endif
-
+#include "OverlayMVP.h"
 #include "Global.h"
 #include "NewGlobal.h"
 #include "SteamHelper.h"
@@ -51,17 +51,17 @@ constexpr int CH_BOMB = 3;  // 炸弹安装
 bool match = true;
 float vol = 0.8f;
 bool debug_mode = true;
-
+std::atomic<bool> bomb_sound_playing{ false };
 
 void StopBombSound() {
-    int ch = bomb_channel.load();
+    int ch = bomb_channel.exchange(-1); // 原子操作确保只执行一次
     if (ch >= 0) {
         Mix_HaltChannel(ch);
-        bomb_channel = -1;
+        if (debug_mode) {
+            std::cout << "[BOMB] Stopped bomb sound on channel " << ch << "\n";
+        }
     }
 }
-
-
 
 void PreloadSounds(bool use_ogg) {
     if (low_memory) {
@@ -69,7 +69,7 @@ void PreloadSounds(bool use_ogg) {
         return;  // 在低内存模式下跳过预加载
     }
 
-    fs::path base_path = "Userspace/CS2/gsi/sounds";
+    fs::path base_path = "setting/gsi/sounds";
     std::string ext = use_ogg ? ".ogg" : ".wav";
 
     // 根据 custom_musickit 决定预加载范围
@@ -160,6 +160,7 @@ void ReinitializeSDL() {
 
 
 bool InitAudioSystem() {
+    Mix_ChannelFinished(BombChannelFinished); // 注册回调
     if (SDL_Init(SDL_INIT_AUDIO) < 0) {
         std::cerr << "SDL_Init Audio failed: " << SDL_GetError() << std::endl;
         return false;
@@ -263,7 +264,7 @@ void ReportKill(int kills_count) {
 
 // 线程安全队列
 
-
+bool ShowMVP = false;
 // 用于保存本地存储的击杀数，避免重复播放音效
 int roundkill_local = -1;  // 初始化为一个不可能的数值
 bool is_first_data_received = true;  // 标记是否是第一次接收到数据
@@ -274,7 +275,7 @@ bool is_first_data_received = true;  // 标记是否是第一次接收到数据
 bool LoadKillingSoundConfig(bool& match, float& vol, bool& use_ogg, bool& show_source_data) {
     // 使用 std::filesystem 构造跨平台路径
 
-    fs::path config_path = fs::path("Userspace") /"CS2" / "gsi" / "config.json" ;
+	fs::path config_path = fs::current_path() / "setting" / "gsi.json";
 
     std::ifstream config_file(config_path);
     if (!config_file.is_open()) {
@@ -340,6 +341,13 @@ bool LoadKillingSoundConfig(bool& match, float& vol, bool& use_ogg, bool& show_s
         low_memory = false;
     }
 
+    if (config.contains("ShowMVP") && config["ShowMVP"].is_boolean()) {
+        ShowMVP = config["ShowMVP"];
+    }
+    else {
+        ShowMVP = false;
+    }
+
 
     return true;
 }
@@ -368,7 +376,7 @@ void ProcessKillQueue(bool match, float vol, bool use_ogg) {
 
 int main(int argc, char* argv[]) {
     system("chcp 65001");
-    SetWorkingDirectory(L"..\\..\\..\\");
+    SetWorkingDirectory(L"..\\..\\");
 
     if (IsPortInUse(1009)) {
         MessageBoxW(nullptr, L"端口 1009 已被占用，无法正常使用GSI服务", L"端口占用", MB_ICONERROR | MB_OK);
@@ -415,8 +423,8 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     InitAudioOnce(use_ogg);
-     PreloadSounds(use_ogg);
-    
+    PreloadSounds(use_ogg);
+    InitOverlayMVP();
 
 
     std::thread receive_thread(ReceiveData, &svr, match, vol, debug_mode);
