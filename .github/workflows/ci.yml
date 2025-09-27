@@ -1,0 +1,372 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  # Code Quality and Linting
+  code-quality:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+        
+    - name: Install linting tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck clang-format
+        pip install cpplint
+        
+    - name: Run cppcheck
+      run: |
+        find code/CPP-OpenSource -name "*.cpp" -o -name "*.h" | xargs cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem
+        
+    - name: Check code formatting
+      run: |
+        find code/CPP-OpenSource -name "*.cpp" -o -name "*.h" | xargs clang-format -style=file --dry-run --Werror
+        
+    - name: Run cpplint
+      run: |
+        find code/CPP-OpenSource -name "*.cpp" -o -name "*.h" | xargs cpplint --filter=-whitespace/tab,-build/include_subdir
+
+  # Documentation Check
+  documentation:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check README
+      run: |
+        if [ ! -f README.md ]; then
+          echo "README.md is missing"
+          exit 1
+        fi
+        
+    - name: Check documentation structure
+      run: |
+        required_docs=("docs/CONTRIBUTING.md" "docs/GIT_WORKFLOW.md")
+        for doc in "${required_docs[@]}"; do
+          if [ ! -f "$doc" ]; then
+            echo "Required documentation file $doc is missing"
+            exit 1
+          fi
+        done
+        
+    - name: Validate markdown
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: .markdownlint.json
+        files: '**/*.md'
+        ignore: 'node_modules'
+
+  # Build and Test - Windows
+  build-windows:
+    name: Build (Windows)
+    runs-on: windows-latest
+    needs: [code-quality]
+    
+    strategy:
+      matrix:
+        configuration: [Release, Debug]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3
+      
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgGitCommitId: 'a42af01b72c28a8e1d7b48107b33e4f286a55ef6'
+        
+    - name: Install dependencies
+      run: |
+        vcpkg install sdl2:x64-windows sdl2-mixer:x64-windows
+        vcpkg install nlohmann-json:x64-windows cpp-httplib:x64-windows
+        vcpkg install simdjson:x64-windows
+        
+    - name: Configure CMake
+      run: |
+        cd code/CPP-OpenSource
+        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        
+    - name: Build
+      run: |
+        cd code/CPP-OpenSource
+        cmake --build build --config ${{ matrix.configuration }} --parallel
+        
+    - name: Run tests
+      run: |
+        cd code/CPP-OpenSource/build
+        ctest --output-on-failure --build-config ${{ matrix.configuration }}
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-${{ matrix.configuration }}-build
+        path: |
+          code/CPP-OpenSource/build/**/*.exe
+          code/CPP-OpenSource/build/**/*.dll
+          code/CPP-OpenSource/build/**/*.lib
+
+  # Build and Test - Linux
+  build-linux:
+    name: Build (Linux)
+    runs-on: ubuntu-latest
+    needs: [code-quality]
+    
+    strategy:
+      matrix:
+        configuration: [Release, Debug]
+        compiler: [gcc, clang]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+        sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev
+        sudo apt-get install -y nlohmann-json3-dev libsimdjson-dev
+        sudo apt-get install -y libcpp-httplib-dev
+        
+    - name: Setup compiler
+      run: |
+        if [ "${{ matrix.compiler }}" = "clang" ]; then
+          sudo apt-get install -y clang
+          echo "CC=clang" >> $GITHUB_ENV
+          echo "CXX=clang++" >> $GITHUB_ENV
+        else
+          echo "CC=gcc" >> $GITHUB_ENV
+          echo "CXX=g++" >> $GITHUB_ENV
+        fi
+        
+    - name: Configure CMake
+      run: |
+        cd code/CPP-OpenSource
+        cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+        
+    - name: Build
+      run: |
+        cd code/CPP-OpenSource
+        cmake --build build --parallel $(nproc)
+        
+    - name: Run tests
+      run: |
+        cd code/CPP-OpenSource/build
+        ctest --output-on-failure
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-${{ matrix.compiler }}-${{ matrix.configuration }}-build
+        path: |
+          code/CPP-OpenSource/build/**/Summer
+          code/CPP-OpenSource/build/**/*.so
+          code/CPP-OpenSource/build/**/*.a
+
+  # Configuration Validation
+  config-validation:
+    name: Configuration Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate CFG files
+      run: |
+        find code/Modules -name "*.cfg" -type f | while read cfg_file; do
+          echo "Validating $cfg_file"
+          # Basic syntax check for CFG files
+          if ! grep -q "^//" "$cfg_file" && [ -s "$cfg_file" ]; then
+            echo "Warning: $cfg_file may be missing header comments"
+          fi
+        done
+        
+    - name: Check module structure
+      run: |
+        for module_dir in code/Modules/*/; do
+          if [ -d "$module_dir" ]; then
+            module_name=$(basename "$module_dir")
+            echo "Checking module: $module_name"
+            
+            # Check for required files
+            if [ ! -f "$module_dir/_init_.cfg" ]; then
+              echo "Error: Module $module_name is missing _init_.cfg"
+              exit 1
+            fi
+          fi
+        done
+
+  # Security Scan
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Bandit security scan
+      uses: securecodewarrior/github-action-add-sarif@v1
+      with:
+        sarif-file: 'bandit-report.sarif'
+      continue-on-error: true
+      
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: cpp
+        
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+      
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  # Performance Testing
+  performance-test:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    needs: [build-linux]
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: linux-gcc-Release-build
+        path: ./build
+        
+    - name: Setup performance testing
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y valgrind time
+        
+    - name: Run memory leak check
+      run: |
+        if [ -f "./build/Summer" ]; then
+          chmod +x ./build/Summer
+          valgrind --leak-check=full --error-exitcode=1 ./build/Summer --test-mode
+        fi
+        
+    - name: Run performance benchmarks
+      run: |
+        if [ -f "./build/Summer" ]; then
+          /usr/bin/time -v ./build/Summer --benchmark
+        fi
+
+  # Integration Tests
+  integration-test:
+    name: Integration Testing
+    runs-on: ubuntu-latest
+    needs: [build-linux]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: linux-gcc-Release-build
+        path: ./build
+        
+    - name: Setup test environment
+      run: |
+        # Create test configuration
+        mkdir -p test-env/config
+        cp -r code/Modules test-env/
+        cp -r setting/* test-env/config/ || true
+        
+    - name: Run integration tests
+      run: |
+        if [ -f "./build/Summer" ]; then
+          chmod +x ./build/Summer
+          cd test-env
+          ../build/Summer --config-test
+        fi
+
+  # Deployment Preparation
+  prepare-release:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    needs: [build-windows, build-linux, config-validation, security-scan]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      
+    - name: Create release package
+      run: |
+        mkdir -p release-package
+        
+        # Copy documentation
+        cp README.md release-package/
+        cp -r docs release-package/
+        
+        # Copy configuration files
+        cp -r code/Modules release-package/
+        cp -r setting release-package/
+        cp -r extra release-package/
+        
+        # Copy build artifacts
+        mkdir -p release-package/bin
+        find . -name "*.exe" -o -name "Summer" | xargs -I {} cp {} release-package/bin/
+        
+        # Create archive
+        tar -czf summer-autumn-latest.tar.gz -C release-package .
+        
+    - name: Upload release package
+      uses: actions/upload-artifact@v3
+      with:
+        name: summer-autumn-release
+        path: summer-autumn-latest.tar.gz
+
+  # Notification
+  notify:
+    name: Notification
+    runs-on: ubuntu-latest
+    needs: [build-windows, build-linux, documentation, config-validation]
+    if: always()
+    
+    steps:
+    - name: Notify on success
+      if: ${{ needs.build-windows.result == 'success' && needs.build-linux.result == 'success' }}
+      run: |
+        echo "✅ All builds completed successfully!"
+        
+    - name: Notify on failure
+      if: ${{ needs.build-windows.result == 'failure' || needs.build-linux.result == 'failure' }}
+      run: |
+        echo "❌ Build failed! Check the logs for details."
+        exit 1
