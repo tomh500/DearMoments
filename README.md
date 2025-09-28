@@ -54,7 +54,7 @@ cs2.exe:
       fps: 64
       hold: true
       delay: false
-
+```
 ---
 
 ## 字段说明
