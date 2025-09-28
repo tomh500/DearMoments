@@ -66,3 +66,35 @@ cs2.exe:
 | `fps`         | int    | 要锁定的帧数           |
 | `hold`        | bool   | 是否按住触发           |
 | `delay`       | bool   | 按住模式下是否延迟触发      |
+
+## 编译说明
+
+此项目仅公开了 CPP 和 H 文件，如果要编译，需要准备以下环境和依赖：
+
+### 依赖
+
+1. **C++17 支持的编译器**  
+   - Visual Studio 2019/2022  
+   - 或 MinGW-w64 / g++ 9+  
+
+2. **第三方库**  
+   - [yaml-cpp](https://github.com/jbeder/yaml-cpp)（用于解析 YAML 配置文件）  
+   - RTSS SDK / DLL（RTSSApi 文件夹提供接口封装）  
+
+3. **Windows SDK**  
+   - 需要 `WinUser.h`、`windows.h` 等头文件  
+
+---
+
+### Visual Studio 编译
+
+1. 创建一个 **空项目**  
+2. 将所有 `.cpp` 和 `.h` 文件添加到项目中  
+3. 配置项目属性：
+   - C/C++ → 语言 → C++17  
+   - 链接器 → 输入 → 附加依赖项：`yaml-cpp.lib`、RTSS SDK 所需库  
+4. 确保 `yaml-cpp` 的头文件路径添加到 C/C++ → 常规 → 附加包含目录  
+5. 编译即可生成可执行文件  
+
+---
+
