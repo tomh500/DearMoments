@@ -1,5 +1,7 @@
-cpp/*
-updateVer.txt
 UpdateVersion.bat
 UpdateVersion.py
-*.wav
+updateVer.txt
+.gitignore
+**/qq_ids.json
+scripts/.listener.lty
+scripts/.rule

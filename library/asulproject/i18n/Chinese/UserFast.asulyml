@@ -1,0 +1,17 @@
+text "min_pulse" "核心逻辑：反向按键最少持续时间（ms）。推荐 15-18。"
+int "min_pulse" "1,50,16" "/quick_stop/logic"
+
+text "max_pulse" "核心逻辑：最大脉冲时间（ms）。长跑后停不下来就改大。"
+int "max_pulse" "1,150,80" "/quick_stop/logic"
+
+text "cap_pulse" "核心逻辑：硬件截断上限。必须大于或等于 max_pulse！"
+int "cap_pulse" "1,200,90" "/quick_stop/logic"
+
+text "move_start_at" "核心逻辑：急停力度开始增加的移动时间阈值。"
+int "move_start_at" "0,1000,200" "/quick_stop/logic"
+
+text "move_cap_at" "核心逻辑：急停力度达到峰值的移动时间阈值。"
+int "move_cap_at" "0,2000,1000" "/quick_stop/logic"
+
+text "silent_keys" "静默键：按下时不触发急停。格式：[160, 162]"
+line "silent_keys" "静默键列表" "[160, 162]" "/quick_stop/interception"

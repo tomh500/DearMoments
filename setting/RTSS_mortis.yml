@@ -1,6 +1,7 @@
-ReadConsole: true
+ReadConsole: false
 cs2.exe:
   binds:
     - key: SPACE
       fps: 64
       hold: true
+      delay: true

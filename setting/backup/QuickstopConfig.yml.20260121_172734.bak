@@ -1,0 +1,21 @@
+# # KICore 急停配置文件 - 推荐稳定版
+# quick_stop:
+# # 核心逻辑参数
+# logic:
+# # 1. 基础脉冲 (ms)
+quick_stop:
+  logic:
+    min_pulse: 16
+# # 2. 最大脉冲 (ms)
+    max_pulse: 80
+# # 3. 硬件截断上限 (ms)
+    cap_pulse: 90
+# # 4. 线性起始时间 (ms)
+    move_start_at: 200
+# # 5. 线性达峰时间 (ms)
+    move_cap_at: 1000
+# # 拦截设置
+# interception:
+# # 静默键列表: 160:Shift, 162:Ctrl, 164:Alt
+  interception:
+    silent_keys: [160, 162]
