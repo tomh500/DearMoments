@@ -1,0 +1,76 @@
+:root {
+    --bg-dark: #1e1e1e;
+    --panel-bg: #252526;
+    --border: #3c3c3c;
+    --text: #cccccc;
+    --accent: #007acc;
+    --accent-hover: #0062a3;
+    --block-scroll: #e67e22;
+    --block-key: #3498db;
+    --block-delay: #9b59b6;
+    --block-click: #2ecc71;
+}
+
+body { margin: 0; background: var(--bg-dark); color: var(--text); font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; }
+
+/* Top Bar */
+.top-bar { height: 45px; background: #323233; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid var(--border); }
+.logo { font-weight: bold; letter-spacing: 1px; }
+.logo span { color: var(--accent); }
+.t-btn { background: #3c3c3c; border: none; color: white; padding: 5px 12px; cursor: pointer; border-radius: 3px; margin-left: 8px; font-size: 13px; }
+.t-btn.primary { background: var(--accent); }
+.t-btn:hover { opacity: 0.8; }
+
+/* Container Layout */
+.container { flex: 1; display: flex; overflow: hidden; padding: 5px; gap: 5px; }
+.panel { background: var(--panel-bg); display: flex; flex-direction: column; border-radius: 4px; }
+.p-header { padding: 8px 12px; font-size: 11px; text-transform: uppercase; color: #858585; border-bottom: 1px solid var(--border); }
+
+.library { width: 180px; }
+.workspace { flex: 2; border: 1px solid var(--border); }
+.editor { flex: 1.5; }
+
+/* Items & Blocks */
+.lib-items { padding: 10px; }
+.item { padding: 10px; background: #333; margin-bottom: 8px; border-radius: 4px; cursor: grab; font-size: 13px; transition: 0.2s; }
+.item:hover { background: #444; border-left: 3px solid var(--accent); }
+
+.drop-zone { flex: 1; padding: 15px; overflow-y: auto; }
+.empty-hint { color: #555; text-align: center; margin-top: 50px; border: 2px dashed #333; padding: 20px; }
+
+.block-inst { background: #333; padding: 10px; margin-bottom: 8px; border-radius: 4px; display: flex; align-items: center; gap: 10px; border-left: 5px solid var(--accent); animation: fadeIn 0.3s; }
+.block-inst input { background: #1e1e1e; border: 1px solid #444; color: #569cd6; width: 50px; padding: 3px; border-radius: 2px; }
+.block-inst button { background: none; border: none; color: #ff5f56; cursor: pointer; font-weight: bold; margin-left: auto; }
+
+/* Block Colors */
+.ACTION_MOUSE_SCROLL { border-color: var(--block-scroll); }
+.ACTION_KEY_TAP { border-color: var(--block-key); }
+.ACTION_DELAY { border-color: var(--block-delay); }
+.ACTION_MOUSE_CLICK { border-color: var(--block-click); }
+
+/* Editor */
+#customCode { flex: 1; background: #1e1e1e; color: #dcdce4; padding: 15px; font-family: 'Consolas', monospace; resize: none; border: none; outline: none; line-height: 1.5; }
+
+.footer { height: 25px; background: var(--accent); color: white; display: flex; justify-content: space-between; align-items: center; padding: 0 10px; font-size: 11px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+:root { --bg: #1e1e1e; --panel: #2d2d2d; --accent: #007acc; --text: #d4d4d4; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Consolas', monospace; height: 100vh; display: flex; flex-direction: column; }
+.top-bar { background: #333; padding: 10px 20px; display: flex; justify-content: space-between; border-bottom: 1px solid #444; }
+.container { flex: 1; display: flex; overflow: hidden; padding: 5px; gap: 5px; }
+.panel { background: var(--panel); border-radius: 4px; display: flex; flex-direction: column; flex: 1; }
+.library { flex: 0 0 200px; }
+.workspace { flex: 1.5; border: 1px solid #444; }
+.preview { flex: 1.2; background: #000; font-size: 12px; }
+.p-header { padding: 8px; font-size: 12px; background: #383838; color: #aaa; }
+
+.item { padding: 10px; margin: 5px; background: #3e3e3e; cursor: pointer; border-radius: 3px; font-size: 13px; }
+.item:hover { background: var(--accent); }
+.act { border-left: 4px solid #e67e22; }
+.log { border-left: 4px solid #9b59b6; }
+
+.block { background: #333; margin: 8px; padding: 10px; border-radius: 5px; border-left: 5px solid var(--accent); position: relative; }
+.block select, .block input { background: #1e1e1e; color: #9cdcfe; border: 1px solid #555; margin: 0 5px; }
+.block .del { float: right; cursor: pointer; color: #ff5f56; }
+#cppPreview { padding: 15px; color: #ce9178; overflow: auto; }
