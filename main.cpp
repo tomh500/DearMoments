@@ -77,6 +77,8 @@ namespace UserMacro {
 
 // ======================== 执行引擎框架 ========================
 int main() {
+
+    system("chcp 65001");
     // 设置 DLL 搜索路径（为了美观，DLL 放在 ./dll 文件夹下）
     SetDllDirectoryA("./dll");
 
@@ -114,4 +116,5 @@ int main() {
     timeEndPeriod(1);
     std::cout << ">>> 引擎已安全退出。" << std::endl;
     return 0;
+
 }
