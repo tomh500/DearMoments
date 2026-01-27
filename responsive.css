@@ -1,0 +1,42 @@
+/* responsive adjustments & mobile */
+@media (max-width: 840px) {
+  .hero {
+    padding: 46px 12px 28px;
+  }
+  .topbar {
+    padding: 0 12px;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero-inner {
+    padding: 0 8px;
+  }
+  table {
+    min-width: 600px;
+  }
+  .menu {
+    left: 8px; /* 移动端也靠左 */
+    top: 56px;
+  }
+  .player-controls {
+    left: 8px;
+    bottom: 104px;
+  }
+  .music-player {
+    left: 12px;
+    bottom: 12px;
+  }
+}
+
+
+/* prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cta,
+  .action-button,
+  .disc {
+    transition: none !important;
+    animation: none !important;
+  }
+}

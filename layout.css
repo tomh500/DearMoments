@@ -1,0 +1,38 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Hero Section */
+header.hero {
+  background: linear-gradient(rgba(7, 16, 36, 0.72), rgba(7, 16, 36, 0.9)), url('https://images.unsplash.com/photo-1582738412147-383a836b6b78?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+  padding: 64px 20px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 按钮类 */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.18s ease;
+}
+
+/* 卡片通用 */
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.015));
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  transition: all 0.22s cubic-bezier(0.2, 0.9, 0.2, 1);
+}

@@ -3,6 +3,75 @@
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 840;
   if (isMobile) document.body.classList.add('mobile');
 
+// 在 (function () { ... })(); 内部追加
+document.addEventListener('click', function(e) {
+  // 寻找带有 data-legacy 属性的链接
+  const legacyLink = e.target.closest('[data-legacy="true"]');
+  if (legacyLink) {
+    e.preventDefault(); // 拦截原生跳转
+    const targetUrl = legacyLink.getAttribute('href');
+    
+    // 弹出强制确认
+    const confirmChoice = confirm("⚠️ 版本弃用提示：\n该工具已停止维护，新版本客户端可能无法解析生成的内容。\n\n确实要继续访问老版本页面吗？");
+    
+    if (confirmChoice) {
+      window.open(targetUrl, '_blank');
+    }
+  }
+});
+
+//这里是申请相关
+const applyBtn = document.getElementById('applyBtn');
+const applyModal = document.getElementById('applyModal');
+const closeModal = document.getElementById('closeModal');
+
+// 打开弹窗
+applyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    applyModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 禁止背景滚动
+});
+
+// 关闭弹窗 (点击关闭按钮或点击遮罩外部)
+const hideModal = () => {
+    applyModal.classList.remove('active');
+    document.body.style.overflow = '';
+};
+
+closeModal.addEventListener('click', hideModal);
+applyModal.addEventListener('click', (e) => {
+    if (e.target === applyModal) hideModal();
+});
+
+//申请相关结束
+
+
+document.querySelectorAll('.confirmed-invalid').forEach(item => {
+    item.addEventListener('click', () => {
+        alert("该功能已由官方确认无原生CFG支持，至于是否能够通过Macro（键盘宏）还原未知，我们也不建议您使用宏功能");
+    });
+});
+
+// 在 main.js 的立即执行函数最后加入
+const notice = document.querySelector('.port-notice');
+if (notice) {
+    notice.style.opacity = '0';
+    notice.style.transform = 'translateY(-10px)';
+    notice.style.transition = 'all 0.8s ease-out';
+    
+    // 当滚动到这个区域时才触发显示
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                notice.style.opacity = '1';
+                notice.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(notice);
+}
+
   // elements
   const menuToggle = document.getElementById('menuToggle'); // 设置按钮
   const toolsMenu = document.getElementById('toolsMenu'); // 设置浮窗
@@ -78,27 +147,22 @@
     }
   }
 
-  function applySettings(settings) {
-    if (settings.player) musicPlayer.style.display = '';
-    else {
+function applySettings(settings) {
+    // 音乐播放器显示逻辑
+    if (settings.player) {
+      musicPlayer.style.display = '';
+    } else {
       musicPlayer.style.display = 'none';
       playerControls.style.display = 'none';
+      if (!bgm.paused) bgm.pause(); // 隐藏时顺便停掉音乐
     }
 
-    const animatedElements = document.querySelectorAll('.card, .cta, .action-button, .disc');
+    // 无障碍模式核心逻辑：仅切换类名
     if (settings.reducedMotion) {
       document.documentElement.classList.add('reduced-motion');
-      animatedElements.forEach((el) => {
-        el.style.transition = 'none';
-        el.style.animation = 'none';
-      });
       disc.classList.remove('playing');
     } else {
       document.documentElement.classList.remove('reduced-motion');
-      animatedElements.forEach((el) => {
-        el.style.transition = '';
-        el.style.animation = '';
-      });
       if (!bgm.paused) {
         disc.classList.add('playing');
       }
@@ -187,7 +251,7 @@
       // Save state to avoid showing it again
       localStorage.setItem(AUTOPLAY_KEY, 'true');
       // Attempt to play music after user interaction
-      bgm.play().catch(e => console.warn('自动播放失败', e));
+      //bgm.play().catch(e => console.warn('自动播放失败', e));
   });
 
 
@@ -214,6 +278,16 @@
       toolsMenu.setAttribute('aria-hidden', 'false');
     }
   });
+
+  document.getElementById('finalActionBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+
 
   // close menus and modals when clicking outside
   document.addEventListener('click', (e) => {

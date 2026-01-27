@@ -648,3 +648,86 @@ body.mobile .cta {
   font-size: 0.9rem;
   color: var(--muted);
 }
+
+/* 废弃项目样式 */
+.legacy-item {
+    color: #555 !important;
+    text-decoration: line-through !important; /* 划线 */
+    filter: grayscale(1); /* 灰色 */
+    cursor: help !important; 
+    transition: all 0.2s;
+}
+
+.legacy-item:hover {
+    background: rgba(255, 0, 0, 0.05) !important;
+    color: #777 !important;
+}
+
+/* 独立设置 DearMacro 的高亮感 */
+.menu a[href*="DearMacro"]:hover {
+    background: rgba(0, 123, 255, 0.2) !important;
+    transform: translateX(4px);
+}
+
+/* 容器边框呼吸动画 */
+.experimental-container {
+    position: relative;
+    border: 1px solid rgba(255, 193, 7, 0.3) !important;
+    animation: border-pulse 3s infinite ease-in-out;
+}
+
+@keyframes border-pulse {
+    0%, 100% { border-color: rgba(255, 193, 7, 0.2); box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45); }
+    50% { border-color: rgba(255, 193, 7, 0.6); box-shadow: 0 0 15px rgba(255, 193, 7, 0.15); }
+}
+
+/* 提示横幅样式 */
+.port-notice {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.notice-icon {
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+.notice-content strong {
+    color: #ffc107;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.notice-content span {
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+/*Nextgen */
+
+/* 重点文字高亮动画 */
+.glitch-text {
+    background: none;
+    color: #ffc107;
+    font-weight: bold;
+    text-decoration: underline;
+    animation: text-flash 1.5s infinite;
+}
+
+@keyframes text-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-3px); }
+}

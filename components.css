@@ -1,0 +1,62 @@
+/* 音乐播放器专供 */
+.music-player {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  width: 84px;
+  height: 84px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.disc.playing { animation: spin 4.6s linear infinite; }
+
+.player-controls {
+  position: fixed;
+  left: 16px;
+  bottom: 110px;
+  background: var(--card-plain);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 3001;
+  /* flex 布局 for new controls */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 菜单 */
+.menu {
+  position: fixed;
+  left: 12px;
+  top: 64px;
+  /* ...其他样式 */
+}
+
+/* 弹窗 */
+.about-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}

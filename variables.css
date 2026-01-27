@@ -1,0 +1,40 @@
+:root {
+  --primary-color: #007bff;
+  --bg: #0f172a;
+  --card: #111827a8;
+  --card-plain: #1e293b;
+  --muted: #9aa6bf;
+  --text: #e2e8f0;
+  --accent: #28a745;
+  --border: #334155;
+  --glass: rgba(255, 255, 255, 0.04);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', 'Microsoft YaHei', sans-serif;
+  background: linear-gradient(180deg, #071024 0%, #0f172a 60%);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* 那个背景图装饰 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('img/cser.png') right bottom no-repeat;
+  background-size: contain;
+  opacity: 0.1; /* Adjust opacity as needed */
+  pointer-events: none;
+  z-index: -1;
+}

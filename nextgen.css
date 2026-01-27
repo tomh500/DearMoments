@@ -1,0 +1,756 @@
+/* 官方实锤不可用的样式 */
+.confirmed-invalid {
+    color: #555 !important; /* 深度灰色 */
+    text-decoration: line-through !important; /* 划线 */
+    opacity: 0.6;
+    position: relative;
+    list-style: none !important; /* 移除原本的圆点 */
+}
+
+/* 在不可用项前面加个 ❌ 符号 */
+.confirmed-invalid::before {
+    content: "❌ ";
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+/* 在末尾自动加上提示 */
+.confirmed-invalid::after {
+    content: " (环境受限/已确认不可用)";
+    font-size: 0.75rem;
+    text-decoration: none !important;
+    color: #ff4d4f; /* 红色警告色 */
+    margin-left: 8px;
+    font-style: italic;
+}
+
+/* 悬停时显示原因提示（可选） */
+.confirmed-invalid:hover::after {
+    content: " (此功能已被证实无原生CFG支持)";
+}
+
+/* 宏实现警告样式 */
+.warning-macro {
+    color: #ffa940 !important;
+    position: relative;
+    cursor: help;
+}
+
+.warning-macro::before {
+    content: "⚠️ ";
+}
+
+.warning-macro::after {
+    content: " [宏实现 - 存在违规风险]";
+    font-size: 0.75rem;
+    color: #ff7a45;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+/* 之前定义的不可用样式补充一个权重类，方便 JS 识别 */
+.confirmed-invalid {
+    order: 99; /* 备用逻辑 */
+}
+
+/* 当无障碍模式开启时，全局镇压所有动态效果 */
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+    /* 强制过渡时间为0 */
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
+    /* 强制动画时间为0 */
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+}
+
+/* 彻底禁止卡片悬停时的位移拉伸 */
+.reduced-motion .card:hover,
+.reduced-motion .cta:hover,
+.reduced-motion .action-button:hover {
+    transform: none !important;
+    box-shadow: none !important; /* 也可以关掉悬停阴影，让视觉更干净 */
+}
+
+/* 强制停止唱片转动 */
+.reduced-motion .disc.playing {
+    animation: none !important;
+}
+
+/* 图标容器 */
+.icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: rgba(var(--primary-rgb, 0, 123, 255), 0.1); /* 淡淡的主色背景 */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feat-icon {
+    width: 24px;
+    height: 24px;
+    /* 让图标颜色跟随文字，或者强制使用主色 */
+    stroke: var(--primary-color);
+    filter: drop-shadow(0 0 4px rgba(0, 123, 255, 0.4));
+}
+
+/* 悬停卡片时图标也动一下 */
+.card:hover .feat-icon {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+/* 统一 CTA 基础动画逻辑 */
+.cta {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1) !important;
+}
+
+/* 1. 下载按钮：深蓝呼吸光晕 */
+#downloadBtn {
+    animation: blue-glow 3s infinite;
+}
+
+@keyframes blue-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); }
+}
+
+/* 2. 社区按钮：绿色震动反馈 (悬停时) */
+#communityBtn:hover {
+    animation: subtle-shake 0.5s ease-in-out;
+}
+
+@keyframes subtle-shake {
+    0%, 100% { transform: translateY(-4px) rotate(0); }
+    25% { transform: translateY(-4px) rotate(1deg); }
+    75% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+/* 3. 申请按钮：金色扫光动画 (炫耀感) */
+.cta.warning-btn {
+    background: linear-gradient(135deg, #ffcc00, #ffb300);
+    color: #000 !important;
+    border: none;
+    z-index: 1;
+}
+
+.cta.warning-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: none;
+    z-index: 2;
+}
+
+.cta.warning-btn:hover::before {
+    left: 200%;
+    transition: all 0.6s ease-in-out;
+}
+
+/* 统一悬停放大缩放 */
+.cta:hover {
+    transform: translateY(-4px) scale(1.03);
+}
+
+/* 别忘了适配你的“减少动画”开关 */
+.reduced-motion .cta {
+    animation: none !important;
+    transition: none !important;
+}
+.reduced-motion .cta::before {
+    display: none !important;
+}
+
+.hero h1 {
+    /* 从纯白平滑过渡到天蓝色 */
+    background: linear-gradient(180deg, #ffffff 30%, #4da3ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* 增加一个非常淡的蓝色光晕，增强字体的厚度 */
+    filter: drop-shadow(0 2px 10px rgba(77, 163, 255, 0.3));
+    letter-spacing: -1px; /* 紧凑排版，更有冲击力 */
+}
+
+/* 弹窗遮罩 这里是申请相关*/
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 弹窗主体 */
+.modal-content {
+    max-width: 550px;
+    width: 90%;
+    padding: 30px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none; border: none;
+    color: #fff; font-size: 24px; cursor: pointer;
+    opacity: 0.5;
+}
+
+.close-modal:hover { opacity: 1; }
+
+/* 流程说明样式 */
+.step-guide {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.step-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.step-num {
+    background: #d9a300;
+    color: #000;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: bold; flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.highlight-red { color: #ff4d4f; }
+
+/* 线路选择按钮 */
+.route-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.route-btn {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.route-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #d9a300;
+}
+
+.protocol-link {
+    color: #d9a300;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.logic-icon-svg {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 10px;
+}
+
+.logic-icon-svg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.logic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.logic-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+/* 标签样式 */
+.logic-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.safe { background: #28a745; color: #fff; }
+.rage { background: #ff4d4f; color: #fff; box-shadow: 0 0 10px rgba(255, 77, 79, 0.5); }
+.tech { background: #007bff; color: #fff; }
+
+/* 重点：不同卡片的发光效果 */
+.border-glow:hover { border-color: #28a745; box-shadow: 0 0 20px rgba(40, 167, 69, 0.2); }
+.anger-glow:hover { border-color: #ff4d4f; box-shadow: 0 0 20px rgba(255, 77, 79, 0.2); }
+.hybrid-glow:hover { border-color: #007bff; box-shadow: 0 0 20px rgba(0, 123, 255, 0.2); }
+
+.logic-card h3 {
+    margin: 15px 0;
+    font-size: 1.4rem;
+    background: linear-gradient(90deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logic-footer {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* 盾牌：安全绿 */
+.border-glow .logic-icon-svg { color: #28a745; filter: drop-shadow(0 0 5px rgba(40,167,69,0.5)); }
+
+/* 闪电：暴力红 */
+.anger-glow .logic-icon-svg { color: #ff4d4f; filter: drop-shadow(0 0 5px rgba(255,77,79,0.5)); }
+
+/* 核心：混动蓝 */
+.hybrid-glow .logic-icon-svg { color: #007bff; filter: drop-shadow(0 0 5px rgba(0,123,255,0.5)); }
+
+/* 悬停时图标微动 */
+.logic-card:hover .logic-icon-svg {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* 下载区面板化 */
+.final-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+    padding: 60px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+.cta-group-final {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 页脚样式 */
+.site-footer {
+    margin-top: 80px;
+    padding-bottom: 40px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+}
+
+.footer-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin-bottom: 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.footer-right {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-right a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-right a:hover {
+    color: #4da3ff;
+}
+
+.version-tag {
+    background: rgba(77, 163, 255, 0.1);
+    color: #4da3ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-family: monospace;
+}
+
+/* 那个在线的小绿点 */
+.status-indicator {
+    color: #28a745;
+    font-weight: bold;
+}
+
+#download {
+    position: relative;
+    overflow: hidden;
+}
+
+#download::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 82, 204, 0.15) 0%, transparent 70%);
+    z-index: -1;
+}
+
+
+
+
+footer {
+    padding: 60px 0 30px;
+    background: transparent;
+}
+
+.footer-minimal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-top-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+/* 左右两侧的渐变细线 */
+.decor-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+/* 底部那一排装饰小字 */
+.footer-bottom-row {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 2px;
+}
+
+.footer-meta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.footer-meta a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-meta a:hover {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.separator {
+    opacity: 0.5;
+}
+
+/* 容器增强 */
+.download-final {
+    padding: 100px 20px;
+    position: relative;
+}
+
+.final-card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 80px 40px;
+    border-radius: 30px;
+}
+
+/* 背景大型装饰文字 */
+.final-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -2px;
+}
+
+/* 唯一的垂直向上按钮 */
+.cta-scroll-up {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #4da3ff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.cta-scroll-up svg {
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.cta-scroll-up:hover {
+    color: #fff;
+    transform: translateY(-5px);
+}
+
+.cta-scroll-up:hover svg {
+    background: #4da3ff;
+    box-shadow: 0 0 30px rgba(77, 163, 255, 0.6);
+}
+
+/* 底部参数条 */
+.system-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 30px;
+}
+
+.stat-unit {
+    text-align: left;
+    font-family: monospace;
+}
+
+.stat-unit span {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.stat-unit b {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+/*消除白色*/
+.final-card {
+    position: relative; /* 必须 */
+    overflow: hidden;   /* 必须，防止人物破框导致横向滚动条 */
+    padding: 100px 40px;
+    background: #0a0a0a;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 确保所有内容水平居中 */
+}
+
+/* 主文案区 */
+.final-main-content {
+    position: relative;
+    z-index: 5; /* 确保在人物之上 */
+    text-align: center;
+}
+
+/* 核心修复：绝对定位人物 */
+
+.svg-character {
+    width: 100%;
+    /* 解决黑色人物看不清的问题，加个蓝色外发光 */
+    filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.4));
+}
+
+/* 按钮样式：垂直布局，箭头在上，文字在下 */
+.cta-scroll-up-v2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    margin-top: 40px;
+    transition: transform 0.3s;
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #007bff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.6);
+}
+
+/* 修复箭头不见了的问题 */
+.icon-circle svg {
+    width: 28px;
+    height: 28px;
+    stroke: white; /* 确保箭头是白色的 */
+}
+
+.cta-scroll-up-v2 span {
+    color: #4da3ff;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.cta-scroll-up-v2:hover {
+    transform: translateY(-5px);
+}
+
+/* 参数条 */
+.system-stats-bar {
+    margin-top: 80px;
+    display: flex;
+    gap: 60px;
+    z-index: 5;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 30px;
+}
+
+
+
+
+
+
+
+
+/*svghero2*/
+/* 通用图层样式 */
+.final-character-layer {
+    position: absolute;
+    bottom: -10px;
+    width: 420px; /* 稍微缩小一点，避免两个人在中间撞车 */
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* 右侧定位 */
+.right-hero {
+    right: -20px;
+}
+
+/* 左侧定位 */
+.left-hero {
+    left: -20px;
+    /* 如果你想让左边的人也面朝中间，取消下面这行的注释 */
+    /* transform: scaleX(-1); */
+}
+
+/* 统一给图片加个滤镜，让暗部更有质感 */
+.svg-character {
+    width: 100%;
+    filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.3)) brightness(1.1);
+}
+
+/* 移动端适配：手机上同时显示两个会很挤，建议隐藏一个或缩小 */
+@media (max-width: 900px) {
+    .left-hero { display: none; } /* 手机端只留一个，防止重叠 */
+    .right-hero { width: 300px; right: -50px; opacity: 0.5; }
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-container {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo-svg {
+    width: 100%;
+    height: 100%;
+    color: #4da3ff; /* 沿用你的天蓝色 */
+    /* 给图标加个淡淡的霓虹发光 */
+    filter: drop-shadow(0 0 8px rgba(77, 163, 255, 0.6));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brand:hover .nav-logo-svg {
+    transform: rotate(15deg) scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(77, 163, 255, 0.9));
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
