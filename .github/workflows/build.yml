@@ -1,0 +1,45 @@
+name: Build DearMacro EXE
+
+on:
+  push:
+    paths:
+      - '**.cpp'
+      - '**.h'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Compile EXE
+      shell: cmd
+      run: |
+        :: 初始化 64 位编译环境
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        
+        :: 开始编译
+        :: /EHsc: 启用 C++ 异常
+        :: /MT: 静态链接运行库 (让用户不用装 VC++ Redistributable)
+        :: /I: 当前目录包含头文件
+        cl.exe /O2 /EHsc /MT /I. main.cpp ^
+        /link ^
+        /OUT:DearMacro.exe ^
+        /SUBSYSTEM:CONSOLE ^
+        /MACHINE:X64 ^
+        /DELAYLOAD:DearMacro_.dll ^
+        DearMacro_.lib ^
+        user32.lib kernel32.lib winmm.lib
+
+    - name: Upload Build Result
+      uses: actions/upload-artifact@v4
+      with:
+        name: DearMacro-Release
+        path: |
+          DearMacro.exe
+          DearMacro_.dll

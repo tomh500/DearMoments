@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DearMacro Compiler v3.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">DEARMACRO <span>COMPILER</span></div>
+        <div class="top-btns">
+            <input type="file" id="importFile" style="display:none">
+            <button class="t-btn" onclick="document.getElementById('importFile').click()">📂 加载项目</button>
+            <button class="t-btn primary" id="exportBtn">🚀 生成 UserMacro.cpp</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="panel library">
+            <div class="p-header">动作指令 (生成到数组)</div>
+            <div class="item act" data-type="SCROLL" data-val="-120">🖱️ 滚轮下滚</div>
+            <div class="item act" data-type="KEY" data-val="65">⌨️ 击键 (A)</div>
+            
+            <div class="p-header">逻辑积木 (生成到Custom)</div>
+            <div class="item log" data-type="IF">❓ 如果按下按键</div>
+            <div class="item log" data-type="LOOP">🔁 循环执行</div>
+            <div class="item log" data-type="CODE">💻 原生代码块</div>
+        </div>
+
+        <div class="panel workspace">
+            <div class="p-header">可视化逻辑流 (拖拽排序)</div>
+            <div id="dropZone" class="drop-zone"></div>
+        </div>
+
+        <div class="panel preview">
+            <div class="p-header">C++ 源码实时预览</div>
+            <pre id="cppPreview"></pre>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
