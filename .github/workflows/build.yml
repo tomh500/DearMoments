@@ -27,7 +27,7 @@ jobs:
         :: /EHsc: 启用 C++ 异常
         :: /MT: 静态链接运行库 (让用户不用装 VC++ Redistributable)
         :: /I: 当前目录包含头文件
-        cl.exe /O2 /EHsc /MT /I. main.cpp ^
+        cl.exe /O2 /utf-8 /EHsc /MT /I. main.cpp ^
         /link ^
         /OUT:DearMacro.exe ^
         /SUBSYSTEM:CONSOLE ^
