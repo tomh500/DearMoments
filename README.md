@@ -2,7 +2,7 @@
  
  ## 🛠️ 一、 产品定义与核心技术
  **DearNextgen** 是一款专为 **Counter-Strike 2** 竞技优化的高级配置插件。其核心逻辑完全基于游戏官方提供的 **Valve Developer Console** 指令集与 **.cfg** 脚本技术实现。
- 本项目始终坚持“非作弊”原则，所有功能均在游戏引擎允许的指令框架内运行，旨在提升玩家的操作连贯性与交互体验，使用本项目即代表您同意我们的[用户协议]((https://github.com/tomh500/DearMoments/blob/Spring/docs/rule.md)。
+ 本项目始终坚持“非作弊”原则，所有功能均在游戏引擎允许的指令框架内运行，旨在提升玩家的操作连贯性与交互体验，使用本项目即代表您同意我们的[用户协议](https://github.com/tomh500/DearMoments/blob/Spring/docs/rule.md)。
  
  ### 安装方式：
  1. 将项目文件夹命名为 `DearNextgen` 并整体放入游戏的 `game/csgo/cfg/` 目录下。
@@ -24,5 +24,6 @@
  
  ---
  *注：请确保在符合竞技准则的前提下使用本项目功能。*
+
 
 
