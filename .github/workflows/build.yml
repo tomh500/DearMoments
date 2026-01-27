@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '**.cpp'
-      - '**.h'
+      - '**.yml'
 
 jobs:
   build:
@@ -33,7 +33,7 @@ jobs:
         /SUBSYSTEM:CONSOLE ^
         /MACHINE:X64 ^
         /DELAYLOAD:DearMacro_.dll ^
-        DearMacro_.lib ^
+        DearMacro_.lib delayimp.lib ^
         user32.lib kernel32.lib winmm.lib
 
     - name: Upload Build Result
