@@ -2,7 +2,7 @@
  
  ## 🛠️ 一、 产品定义与核心技术
  **DearNextgen** 是一款专为 **Counter-Strike 2** 竞技优化的高级配置插件。其核心逻辑完全基于游戏官方提供的 **Valve Developer Console** 指令集与 **.cfg** 脚本技术实现。
- 本项目始终坚持“非作弊”原则，所有功能均在游戏引擎允许的指令框架内运行，旨在提升玩家的操作连贯性与交互体验。
+ 本项目始终坚持“非作弊”原则，所有功能均在游戏引擎允许的指令框架内运行，旨在提升玩家的操作连贯性与交互体验，使用本项目即代表您同意我们的[用户协议]([http](https://github.com/tomh500/DearMoments/blob/Spring/docs/rule.md)。
  
  ### 安装方式：
  1. 将项目文件夹命名为 `DearNextgen` 并整体放入游戏的 `game/csgo/cfg/` 目录下。
@@ -12,7 +12,7 @@
  ## ⚙️ 二、 进阶扩展：DearMacro 键盘宏引擎
  对于 CFG 指令无法触及的实验性需求，我们提供了 **DearMacro** 解决方案：
  * **技术栈**：基于 **C++ 20** 开发的高性能键盘指令引擎。
- * **自定义编译**：用户需前往 [tomh500/DearMoments](https:github.com/tomh500/DearMoments) 仓库，切换至 `applist/DearMacro` 分支。
+ * **自定义编译**：用户需前往 [tomh500/DearMoments](https://github.com/tomh500/DearMoments) 仓库，切换至 `applist/DearMacro` 分支。
  * **云端构建**：通过 **Fork** 本仓库并修改源代码，利用 **GitHub Actions** 自动编译生成专属的 `.exe` 二进制文件。
  * **可视化编程**：目前已支持测试性的“积木式”在线编程，降低 C++ 开发门槛，详情请参阅官方网站。
  
@@ -20,7 +20,8 @@
  * **授权机制**：本插件目前采取“申请准入制”，需获得开发者批准方可激活。
  * **区域限制**：当前阶段仅对中国大陆地区用户开放申请。
  * **获取支持**：请加入我们的 **Discord** 社区获取最新版本、申请授权及反馈技术建议。
- * **官方站点**：[DearMoments 门户](https:tomh500.github.io/DearMoments)
+ * **官方站点**：[DearMoments 门户](https://tomh500.github.io/DearMoments)
  
  ---
  *注：请确保在符合竞技准则的前提下使用本项目功能。*
+
