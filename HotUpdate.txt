@@ -1,0 +1,311 @@
+"genHotUpdate.py"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/genHotUpdate.py
+
+"library/asulproject/fastconfig.asulink"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/library/asulproject/fastconfig.asulink
+
+"library/asulproject/fastconfig_EN.asulink"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/library/asulproject/fastconfig_EN.asulink
+
+"library/asulproject/i18n/Chinese/UserKeyBinds.asul"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/library/asulproject/i18n/Chinese/UserKeyBinds.asul
+
+"library/resource/version.txt"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/library/resource/version.txt
+
+"scripts/legacy/Commands/Reg_Code.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/Commands/Reg_Code.cfg
+
+"scripts/legacy/Commands/Reg_Keybinds.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/Commands/Reg_Keybinds.cfg
+
+"scripts/legacy/Commands/_init_.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/Commands/_init_.cfg
+
+"scripts/legacy/OutputSystem/_init_.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/_init_.cfg
+
+"scripts/legacy/OutputSystem/SoundTips/_init_.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/SoundTips/_init_.cfg
+
+"scripts/legacy/OutputSystem/TextTips/All.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/All.cfg
+
+"scripts/legacy/OutputSystem/TextTips/CW.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/CW.cfg
+
+"scripts/legacy/OutputSystem/TextTips/Debug.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/Debug.cfg
+
+"scripts/legacy/OutputSystem/TextTips/Echo.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/Echo.cfg
+
+"scripts/legacy/OutputSystem/TextTips/Null.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/Null.cfg
+
+"scripts/legacy/OutputSystem/TextTips/Team.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/OutputSystem/TextTips/Team.cfg
+
+"scripts/legacy/SQ/4items/Nogui.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/Nogui.cfg
+
+"scripts/legacy/SQ/4items/Overlay.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/Overlay.cfg
+
+"scripts/legacy/SQ/4items/_init_.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/_init_.cfg
+
+"scripts/legacy/SQ/4items/actions/ancinet/ctmid.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/ancinet/ctmid.cfg
+
+"scripts/legacy/SQ/4items/actions/ancinet/midtoa.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/ancinet/midtoa.cfg
+
+"scripts/legacy/SQ/4items/actions/ancinet/vip.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/ancinet/vip.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/bdoor.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/bdoor.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/dust2_tbflash.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/dust2_tbflash.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/FXbox1.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/FXbox1.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/FXbox2.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/FXbox2.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/FXbox3.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/FXbox3.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/FXbox4.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/FXbox4.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/item_1750385763015.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/item_1750385763015.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/scaffold.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/scaffold.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/shorttoafire.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/shorttoafire.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/spin.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/spin.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/Xbox.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/Xbox.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_bdoorcheat.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_bdoorcheat.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_ctcheat.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_ctcheat.cfg
+
+"scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_shortcheat.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/dust2/AttackCheat/dust2_shortcheat.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/bananamid.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/bananamid.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/bflashplus.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/bflashplus.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fk4_dz.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fk4_dz.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fkqd4_dz.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fkqd4_dz.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/tmid.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/tmid.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/ttoapath.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/ttoapath.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/ttoct.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/ttoct.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/faze.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/faze.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze1.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze1.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze2.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze2.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze3.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze3.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze4.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze4.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze5.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze5.cfg
+
+"scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze6.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/inferno/fastfaze/inferno_ffaze6.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_adoor.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_adoor.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_btoshopwindow.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_btoshopwindow.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_jg.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_jg.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_stand.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_stand.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip1.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip1.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip2.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip2.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip3.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip3.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip4.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip4.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip5.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip5.cfg
+
+"scripts/legacy/SQ/4items/actions/mirage/mirage_vip6.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/mirage/mirage_vip6.cfg
+
+"scripts/legacy/SQ/4items/actions/nuke/nuke_ladder.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/nuke/nuke_ladder.cfg
+
+"scripts/legacy/SQ/4items/actions/nuke/nuke_out1.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/nuke/nuke_out1.cfg
+
+"scripts/legacy/SQ/4items/actions/nuke/nuke_out2.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/nuke/nuke_out2.cfg
+
+"scripts/legacy/SQ/4items/actions/nuke/nuke_out3.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/nuke/nuke_out3.cfg
+
+"scripts/legacy/SQ/4items/actions/nuke/nuke_tdfire.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/nuke/nuke_tdfire.cfg
+
+"scripts/legacy/SQ/4items/actions/overpass/.keepfile"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/overpass/.keepfile
+
+"scripts/legacy/SQ/4items/actions/overpass/test1.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/overpass/test1.cfg
+
+"scripts/legacy/SQ/4items/actions/overpass/testitems.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/overpass/testitems.cfg
+
+"scripts/legacy/SQ/4items/actions/vertigo/.keepfile"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/actions/vertigo/.keepfile
+
+"scripts/legacy/SQ/4items/tools/itemthrow.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/tools/itemthrow.cfg
+
+"scripts/legacy/SQ/4items/tools/itemthrow_withoutjump.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/tools/itemthrow_withoutjump.cfg
+
+"scripts/legacy/SQ/4items/UI/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/administratorfeatures/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/administratorfeatures/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/administratorfeatures/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/administratorfeatures/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/ancient/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/ancient/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/ancient/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/ancient/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/anubis/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/anubis/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/anubis/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/anubis/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/AItems/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/AItems/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/AItems/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/AItems/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/AttackCheat/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/AttackCheat/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/AttackCheat/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/AttackCheat/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/BItems/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/BItems/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/BItems/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/BItems/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/Xbox/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/Xbox/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/dust2/Xbox/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/dust2/Xbox/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/inferno/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/inferno/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/inferno/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/inferno/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/inferno/FASTFAZE/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/inferno/FASTFAZE/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/inferno/FASTFAZE/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/inferno/FASTFAZE/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/mirage/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/mirage/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/mirage/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/mirage/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/nuke/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/nuke/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/nuke/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/nuke/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/overpass/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/overpass/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/overpass/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/overpass/InterfaceText.cfg
+
+"scripts/legacy/SQ/4items/UI/vertigo/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/vertigo/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/4items/UI/vertigo/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/4items/UI/vertigo/InterfaceText.cfg
+
+"scripts/legacy/SQ/S_change/InterfaceCMD.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/S_change/InterfaceCMD.cfg
+
+"scripts/legacy/SQ/S_change/InterfaceText.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/legacy/SQ/S_change/InterfaceText.cfg
+
+"scripts/nextgen/main.cfg"
+- https://raw.githubusercontent.com/tomh500/DearMoments/refs/heads/HotUpdate/scripts/nextgen/main.cfg
