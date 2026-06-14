@@ -1,0 +1,24 @@
+text "tips" "This is an explanation of the configuration file to help you quickly understand the purpose of each option."
+text "match" "This option is deprecated in the new version, please keep it true."
+bool "match" "true" "/"
+
+text "mvp" "This option is deprecated in the new version, please keep it true."
+bool "mvp" "true" "/"
+
+text "vol" "Playback volume, range of vol∈(0.0 , 1.0]. When vol is set to 1.0, it represents the original audio volume. If you need a louder volume, you can enlarge it externally using ffmpeg before loading."
+float "vol" "0.0,1.0,0.88" "/"
+
+text "ogg" "Whether the audio format uses .ogg. If not, it will use wav. If your audio is not playing correctly, please convert it properly using ffmpeg."
+bool "ogg" "false" "/"
+
+text "custom_musickit" "Whether to enable custom music kit logic. Use this feature as needed. If you don't need a specific music file, you can delete it individually."
+bool "custom_musickit" "true" "/"
+
+text "custom_flashbang" "Whether to enable flashbang overlay. If enabled, when a player loses sight due to a flashbang, a custom image will be rendered on the screen's upper layer."
+bool "custom_flashbang" "false" "/"
+
+text "low_memory" "Whether to enable low memory mode. Enabling this option will reduce memory usage at the cost of increased disk I/O."
+bool "low_memory" "false" "/"
+
+text "show_mvp" "Whether to display the MVP information board."
+bool "show_mvp" "true" "/"

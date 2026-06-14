@@ -1,0 +1,2 @@
+将lcfg二进制文件和lua54.dll放入本目录，然后
+使用 lcfg -buildbhop 以进行构建

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "DM监听器\\x64\\Release\\ConsoleUI.obj",
+            "outputs": [
+                "DM监听器\\x64\\Release\\ConsoleUI.h_6219A440E04AD7CA.ifc.dt.module.json",
+                "DM监听器\\x64\\Release\\ConsoleUI.h_6219A440E04AD7CA.ifc.dt.d.json",
+                "DM监听器\\x64\\Release\\ConsoleUI.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\cfg\\Summer\\cpp\\DM监听器\\ConsoleUI.h",
+                    "source-path": "c:\\program files (x86)\\steam\\steamapps\\common\\counter-strike global offensive\\game\\csgo\\cfg\\summer\\cpp\\dm监听器\\consoleui.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

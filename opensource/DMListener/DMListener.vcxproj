@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelDebug|Win32">
+      <Configuration>RelDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelDebug|x64">
+      <Configuration>RelDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{feaf1a2e-d460-453a-9fd9-90fe8324ed36}</ProjectGuid>
+    <RootNamespace>DM监听器</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\PublicLib\Dependency.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)..\PublicLib\curl-8.13.0\include;$(SolutionDir)..\PublicLib\Everything-SDK\include;$(SolutionDir)..\PublicLib\SDL2-2.32.8\include;$(SolutionDir)..\PublicLib\SDL2_mixer-2.8.1\include;$(SolutionDir)..\PublicLib\runtime\cpp-httplib-0.23.1;$(SolutionDir)..\PublicLib\x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\PublicLib\SDL2_mixer-2.8.1\lib\x64;$(SolutionDir)..\PublicLib\SDL2-2.32.8\lib\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64;$(SolutionDir)..\PublicLib\Everything-SDK\lib;$(SolutionDir)..\PublicLib\curl-8.13.0\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Listener</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|x64'">
+    <IncludePath>D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\GetCPUInfo\runtime\curl-8.13.0\include;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\NormalLib\Everything-SDK\include;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2-2.32.8\include;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2_mixer-2.8.1\include;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\cpp-httplib-0.23.1;C:\Users\jingy\vcpkg\packages\yaml-cpp_x64-windows-static\include\yaml-cpp;C:\Users\jingy\vcpkg\installed\x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2_mixer-2.8.1\lib\x64;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2-2.32.8\lib\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\NormalLib\Everything-SDK\lib;D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\GetCPUInfo\runtime\curl-8.13.0\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Listener</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\GetCPUInfo\runtime\curl-8.13.0\include;C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2-2.32.8\include;C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2_mixer-2.8.1\include;C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\cpp-httplib-0.23.1;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\GetCPUInfo\runtime\curl-8.13.0\lib;C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2_mixer-2.8.1\lib;C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\DM监听器\runtime\SDL2-2.32.8\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|x64'" Label="Vcpkg">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8</AdditionalOptions>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shlwapi.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;libcurl.lib;Everything64.lib;ws2_32.lib;wldap32.lib;crypt32.lib;normaliz.lib;delayimp.lib;"C:\Users\jingy\vcpkg\packages\yaml-cpp_x64-windows-static\lib\yaml-cpp.lib";"D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\CS2-GSI\SteamHelper.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>libcurl.dll;libxmp.dll;zlib1.dll;SDL2.dll;SDL2_mixer.dll;Everything64.dll;SteamHelper.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATIC;YAML_CPP_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalOptions>/utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shlwapi.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;libcurl.lib;Everything64.lib;ws2_32.lib;wldap32.lib;crypt32.lib;normaliz.lib;delayimp.lib;SteamHelper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.22621.0\um\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <UACExecutionLevel>HighestAvailable</UACExecutionLevel>
+      <DelayLoadDLLs>libcurl.dll;libxmp.dll;zlib1.dll;SDL2.dll;SDL2_mixer.dll;Everything64.dll;SteamHelper.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0004</Culture>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\library\resource\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelDebug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;YAML_CPP_STATIC_DEFINE;YAML_CPP_STATIC;YAML_CPP_API;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <AdditionalOptions>/utf-8</AdditionalOptions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <SupportJustMyCode>true</SupportJustMyCode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shlwapi.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;libcurl.lib;Everything64.lib;ws2_32.lib;wldap32.lib;crypt32.lib;normaliz.lib;delayimp.lib;"C:\Users\jingy\vcpkg\packages\yaml-cpp_x64-windows-static\lib\yaml-cpp.lib";"D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\Summer\cpp\CS2-GSI\SteamHelper.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\x64;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.22621.0\um\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <UACExecutionLevel>HighestAvailable</UACExecutionLevel>
+      <DelayLoadDLLs>libcurl.dll;libxmp.dll;zlib1.dll;SDL2.dll;SDL2_mixer.dll;Everything64.dll;SteamHelper.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <ResourceCompile>
+      <Culture>0x0004</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDialog.h" />
+    <ClInclude Include="AntiHack.h" />
+    <ClInclude Include="AppStoreFetcher.h" />
+    <ClInclude Include="AutoStartViaBatManager.h" />
+    <ClInclude Include="CFGManager.h" />
+    <ClInclude Include="CommandHandler.h" />
+    <ClInclude Include="DMMain.h" />
+    <ClInclude Include="dr_flac.h" />
+    <ClInclude Include="dr_mp3.h" />
+    <ClInclude Include="dr_wav.h" />
+    <ClInclude Include="ExtractResource.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="GSI.h" />
+    <ClInclude Include="Hardinfo.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="MusicHead.h" />
+    <ClInclude Include="MusicPlayer.h" />
+    <ClInclude Include="OutputRedirector.h" />
+    <ClInclude Include="QQNumChk.h" />
+    <ClInclude Include="ReadConsole\LogWatcher.h" />
+    <ClInclude Include="ReadConsole\RegistryReader.h" />
+    <ClInclude Include="ReadConsole\VdfParser.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="RTSSApi\rtss-core.h" />
+    <ClInclude Include="RTSSApi\RTSSInterface.h" />
+    <ClInclude Include="RTSS_mortis.h" />
+    <ClInclude Include="ScreenTools.h" />
+    <ClInclude Include="SharedMem.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Ticker.h" />
+    <ClInclude Include="Tools.h" />
+    <ClInclude Include="UpdateChecker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDialog.cpp" />
+    <ClCompile Include="AntiHack.cpp" />
+    <ClCompile Include="AppStore.cpp" />
+    <ClCompile Include="AutoStartViaBatManager.cpp" />
+    <ClCompile Include="CFGManager.cpp" />
+    <ClCompile Include="CommandHandler.cpp" />
+    <ClCompile Include="ConsoleUI.cpp" />
+    <ClCompile Include="DMMain.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="ExtractResource.cpp" />
+    <ClCompile Include="ConsoleUI.h" />
+    <ClCompile Include="Hardinfo.cpp" />
+    <ClCompile Include="MusicHead.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
+    <ClCompile Include="OutputRedirector.cpp" />
+    <ClCompile Include="QQNumChk.cpp" />
+    <ClCompile Include="ReadConsole\LogWatcher.cpp" />
+    <ClCompile Include="ReadConsole\RegistryReader.cpp" />
+    <ClCompile Include="ReadConsole\VdfParser.cpp" />
+    <ClCompile Include="RTSSApi\rtss-core.cpp" />
+    <ClCompile Include="RTSSApi\RTSSInterface.cpp" />
+    <ClCompile Include="RTSS_mortis.cpp" />
+    <ClCompile Include="ScreenTools.cpp" />
+    <ClCompile Include="SharedMem.cpp" />
+    <ClCompile Include="Ticker.cpp" />
+    <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="UpdateChecker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DMListener.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\src\resources\icon\test.ico" />
+    <Image Include="..\..\src\resources\lty.ico" />
+    <Image Include="background.bmp" />
+    <Image Include="DMListener.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="encrypt.sq" />
+    <None Include="exports.def" />
+    <None Include="UpdateChecker.cpp.backup" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

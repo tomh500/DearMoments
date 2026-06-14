@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "DM监听器\\x64\\Release\\ConsoleUI.obj",
+            "outputs": [
+                "DM监听器\\x64\\Release\\ConsoleUI.h_E78A0D99A43F9F52.ifc.dt.module.json",
+                "DM监听器\\x64\\Release\\ConsoleUI.h_E78A0D99A43F9F52.ifc.dt.d.json",
+                "DM监听器\\x64\\Release\\ConsoleUI.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\jingy\\Desktop\\cpp\\DM监听器\\ConsoleUI.h",
+                    "source-path": "c:\\users\\jingy\\desktop\\cpp\\dm监听器\\consoleui.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "DMListener\\x64\\Release\\ConsoleUI.obj",
+            "outputs": [
+                "DMListener\\x64\\Release\\ConsoleUI.h_14796857E39357A7.ifc.dt.module.json",
+                "DMListener\\x64\\Release\\ConsoleUI.h_14796857E39357A7.ifc.dt.d.json",
+                "DMListener\\x64\\Release\\ConsoleUI.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\jingy\\Desktop\\DearNextgen\\opensource\\DM监听器\\ConsoleUI.h",
+                    "source-path": "c:\\users\\jingy\\desktop\\dearnextgen\\opensource\\dm监听器\\consoleui.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

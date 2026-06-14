@@ -1,0 +1,340 @@
+#pragma warning(push)
+#pragma warning(disable: 4251 4275) // 屏蔽 YAML 的 DLL 接口警告
+#include <yaml-cpp/yaml.h>
+#pragma warning(pop)
+#include "UpdateChecker.h"
+#include <windows.h>
+#include <fstream>
+#include <string>
+#include <thread>
+#include <iostream>
+#include <wininet.h>
+#include <shlwapi.h>
+#include <sstream>
+#include "Global.h"
+#include "Resource.h"
+#include "Tools.h"
+#pragma comment(lib, "wininet.lib")
+#include <filesystem>
+using namespace std;
+extern int LocalVersion;
+wchar_t title[256];
+bool HotUpdate_req = false;
+
+using namespace std;
+using namespace filesystem;
+namespace fs = std::filesystem;
+
+const wchar_t* url;
+// --- 声明区 ---
+std::wstring Utf8ToWstring(const std::string& str);
+std::string DownloadTextFile(const std::wstring& url, long timeoutSec = 15);
+void PerformHotUpdate(HWND hWnd, std::wstring manifestUrl);
+
+
+int ShowCloudMsg(HWND hWnd) {
+    // 如果 regionCode 不等于 1，直接返回
+    if (regionCode != 1) {
+        return 0; // 空函数
+    }
+
+    // 定义消息文件的 URL
+    const wchar_t* messageUrl = L"";
+
+    // 打开网络连接
+    HINTERNET hInternet = InternetOpenW(L"CloudMsgFetcher", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
+    if (!hInternet) {
+        MessageBoxW(hWnd, L"无法打开网络连接 (InternetOpenW 失败)", L"错误", MB_ICONERROR | MB_TASKMODAL);
+        return -1;
+    }
+
+    // 打开远程 URL
+    HINTERNET hMessageFile = InternetOpenUrlW(hInternet, messageUrl, NULL, 0, INTERNET_FLAG_RELOAD, 0);
+    if (!hMessageFile) {
+        MessageBoxW(hWnd, L"无法打开远程 Message.txt 文件 (InternetOpenUrlW 失败)", L"错误", MB_ICONERROR | MB_TASKMODAL);
+        InternetCloseHandle(hInternet);
+        return -1;
+    }
+
+    // 读取文件内容
+    char messageBuffer[1024] = { 0 }; // 假定文件内容不会超过 1024 字节
+    DWORD bytesRead = 0;
+    if (!InternetReadFile(hMessageFile, messageBuffer, sizeof(messageBuffer) - 1, &bytesRead) || bytesRead == 0) {
+        MessageBoxW(hWnd, L"无法读取远程 Message.txt 文件 (InternetReadFile 失败)", L"错误", MB_ICONERROR | MB_TASKMODAL);
+        InternetCloseHandle(hMessageFile);
+        InternetCloseHandle(hInternet);
+        return -1;
+    }
+
+    // 确保缓冲区以空字符结尾
+    messageBuffer[bytesRead] = '\0';
+
+    // 解析第一行是否为 Enable=1;
+    std::istringstream contentStream(messageBuffer);
+    std::string firstLine;
+    std::getline(contentStream, firstLine);
+    if (firstLine != "Enable=1;") {
+        // 如果第一行不是 Enable=1，直接退出
+        InternetCloseHandle(hMessageFile);
+        InternetCloseHandle(hInternet);
+        return 0;
+    }
+
+    // 将内容转换为 wchar_t 并处理换行符
+    std::string remainingContent;
+    std::string line;
+    while (std::getline(contentStream, line)) {
+        remainingContent += line + "\n"; // 保留换行符
+    }
+
+    wchar_t wideMessageBuffer[1024] = { 0 };
+    MultiByteToWideChar(CP_UTF8, 0, remainingContent.c_str(), -1, wideMessageBuffer, 1024);
+
+    // 显示内容到 MessageBoxW (Tips 样式)
+    MessageBoxW(hWnd, wideMessageBuffer, L"提示", MB_OK | MB_ICONINFORMATION | MB_TASKMODAL);
+
+    // 清理网络资源
+    InternetCloseHandle(hMessageFile);
+    InternetCloseHandle(hInternet);
+
+    return 0; // 返回成功状态
+}
+// 告诉编译器：这个函数在后面，你先记住它的样子
+std::string DownloadTextFile(const std::wstring& url, long timeoutSec);
+
+void CheckForUpdate(HWND hWnd) {
+    std::thread([hWnd]() {
+        // 1. 确定云端配置文件的 URL
+        std::wstring configUrl = (regionCode == 1) ?
+            L"" :
+            L"";
+
+        // 2. 下载并加载 YAML
+        std::string yamlContent = DownloadTextFile(configUrl);
+        if (yamlContent.empty()) return;
+
+        try {
+            YAML::Node config = YAML::Load(yamlContent);
+
+            // 3. 根据 debug 权限选择分支
+            std::string channel = (debug == 1) ? "developer" : "release";
+            auto node = config["channels"][channel];
+
+            int remoteVersion = node["latest_version"].as<int>();
+            int minRequired = node["min_required"].as<int>();
+            std::string updateType = node["update_type"].as<std::string>();
+            std::string changelog = node["changelog"].as<std::string>();
+            std::string manifestUrl = node["manifest_url"].as<std::string>();
+            std::string fullUrl = node["full_url"].as<std::string>();
+
+            // 4. 读取本地版本 (使用修正后的 RootPath)
+            int localVersion = -1;
+            fs::path versionPath = RootPath / L"library" / L"resource" / L"version.txt";
+            std::ifstream localFile(versionPath);
+            if (localFile >> localVersion) {
+                localFile.close();
+            }
+
+            // 5. 核心判断逻辑
+            if (localVersion < remoteVersion) {
+                // A. 强制更新判断 (如果本地版本低于最低要求，或者云端指定必须下大包)
+                if (localVersion < minRequired || updateType == "full") {
+                    std::wstring warnMsg = L"版本过旧，必须更新！\n\n更新日志：\n" +
+                        std::wstring(changelog.begin(), changelog.end());
+                    MessageBoxW(hWnd, warnMsg.c_str(), L"强制更新确认", MB_ICONWARNING | MB_OK);
+
+                    // 调用系统浏览器打开完整包地址
+                    ShellExecuteA(NULL, "open", fullUrl.c_str(), NULL, NULL, SW_SHOWNORMAL);
+                    ExitProcess(0);
+                }
+
+                // B. 热更新/可选更新判断
+                std::wstring updateMsg = L"发现新版本: " + std::to_wstring(remoteVersion) +
+                    L" (当前: " + std::to_wstring(localVersion) + L")\n" +
+                    L"分支: " + std::wstring(channel.begin(), channel.end()) + L"\n\n" +
+                    L"更新内容：\n" + std::wstring(changelog.begin(), changelog.end()) +
+                    L"\n\n是否执行热更新补丁？";
+
+                if (MessageBoxW(hWnd, updateMsg.c_str(), L"发现新补丁", MB_YESNO | MB_ICONINFORMATION) == IDYES) {
+                    // 这里需要稍微改下 PerformHotUpdate，让它接受自定义的 manifestUrl
+                    PerformHotUpdate(hWnd, Utf8ToWstring(manifestUrl));
+                   //PerformHotUpdate(hWnd, true); // 暂按旧的跑，但内部建议用解析出的 manifestUrl
+                }
+            }
+            else if (localVersion > remoteVersion && debug != 1) {
+                // 非开发者的版本号异常
+                MessageBoxW(hWnd, L"检测到本地版本号异常，请重新安装。", L"错误", MB_ICONERROR);
+            }
+        }
+        catch (const std::exception& e) {
+            if (debug == 1) {
+                std::string err = "YAML 解析失败: " + std::string(e.what());
+                MessageBoxA(hWnd, err.c_str(), "Debug Error", MB_OK);
+            }
+        }
+        }).detach();
+}
+#include <curl/curl.h>
+#include <string>
+#include <windows.h>
+#include <winhttp.h>
+#pragma comment(lib, "winhttp.lib")
+
+// 写入数据回调
+static size_t WriteToString(void* ptr, size_t size, size_t nmemb, void* userdata) {
+    std::string* str = static_cast<std::string*>(userdata);
+    size_t totalSize = size * nmemb;
+    str->append(static_cast<char*>(ptr), totalSize);
+    return totalSize;
+}
+
+// 从 Windows 读取系统代理
+static std::string GetSystemProxy() {
+    WINHTTP_CURRENT_USER_IE_PROXY_CONFIG proxyConfig;
+    if (WinHttpGetIEProxyConfigForCurrentUser(&proxyConfig)) {
+        if (proxyConfig.lpszProxy) {
+            // 转换宽字符串为 UTF-8 窄字符串
+            int size_needed = WideCharToMultiByte(CP_UTF8, 0, proxyConfig.lpszProxy, -1, NULL, 0, NULL, NULL);
+            std::string proxyUtf8(size_needed - 1, 0);
+            WideCharToMultiByte(CP_UTF8, 0, proxyConfig.lpszProxy, -1, &proxyUtf8[0], size_needed, NULL, NULL);
+
+            GlobalFree(proxyConfig.lpszProxy);
+            if (proxyConfig.lpszProxyBypass) GlobalFree(proxyConfig.lpszProxyBypass);
+            if (proxyConfig.lpszAutoConfigUrl) GlobalFree(proxyConfig.lpszAutoConfigUrl);
+            return proxyUtf8;
+        }
+    }
+    return "";
+}
+
+// 使用 curl 下载文本文件（自动应用系统代理）
+std::string DownloadTextFile(const std::wstring& url, long timeoutSec) {
+    std::string buffer;
+    CURL* curl = curl_easy_init();
+    if (!curl) return buffer;
+
+    // 宽字符串转 UTF-8 窄字符串
+    int size_needed = WideCharToMultiByte(CP_UTF8, 0, url.c_str(), -1, NULL, 0, NULL, NULL);
+    std::string urlUtf8(size_needed - 1, 0);
+    WideCharToMultiByte(CP_UTF8, 0, url.c_str(), -1, &urlUtf8[0], size_needed, NULL, NULL);
+
+    // 基本设置
+    curl_easy_setopt(curl, CURLOPT_URL, urlUtf8.c_str());
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeoutSec);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteToString);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
+
+    // 检查系统代理
+    std::string proxy = GetSystemProxy();
+    if (!proxy.empty()) {
+        curl_easy_setopt(curl, CURLOPT_PROXY, proxy.c_str());
+    }
+
+    CURLcode res = curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
+
+    if (res != CURLE_OK) {
+        buffer.clear();
+    }
+    return buffer;
+}
+
+// 将 UTF-8 编码的字符串转换为 Windows 宽字符串 (wstring)
+std::wstring Utf8ToWstring(const std::string& str) {
+    if (str.empty()) return L"";
+
+    // 1. 计算转换后需要的缓冲区长度
+    int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+
+    // 2. 分配空间并执行转换
+    std::wstring wstrTo(size_needed, 0);
+    MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
+
+    return wstrTo;
+}
+
+// 热更新函数
+// 修改参数：接受一个动态的清单 URL
+void PerformHotUpdate(HWND hWnd, std::wstring manifestUrl) {
+    if (manifestUrl.empty()) {
+        return;
+    }
+
+    MessageBoxW(hWnd, L"正在热更新，请稍候…", L"提示", MB_OK | MB_ICONINFORMATION | MB_TASKMODAL);
+
+    // 1. 下载对应的 HotUpdate 清单文件 (由 CheckForUpdate 传进来的分流地址)
+    std::string hotUpdateContent = DownloadTextFile(manifestUrl);
+
+    if (hotUpdateContent.empty()) {
+        MessageBoxW(hWnd, L"无法下载热更新清单，请检查网络连接。", L"错误", MB_ICONERROR | MB_TASKMODAL);
+        return;
+    }
+
+    std::istringstream iss(hotUpdateContent);
+    std::string line;
+    std::string currentPath;
+
+    while (std::getline(iss, line)) {
+        // 去掉首尾杂质
+        line.erase(0, line.find_first_not_of(" \t\r\n"));
+        line.erase(line.find_last_not_of(" \t\r\n") + 1);
+        if (line.empty()) continue;
+
+        if (line[0] == '"') {
+            // 解析本地目标路径 (例如 "library/resource/version.txt")
+            size_t quoteEnd = line.find('"', 1);
+            if (quoteEnd == std::string::npos) continue;
+
+            std::string pathStr = line.substr(1, quoteEnd - 1);
+            std::replace(pathStr.begin(), pathStr.end(), '\\', '/'); // 统一路径斜杠
+            currentPath = pathStr;
+        }
+        else if (line.rfind("-", 0) == 0 && !currentPath.empty()) {
+            // 解析下载 URL (例如 - https://xxx.com/file)
+            std::string fileUrlUtf8 = line.substr(1);
+            fileUrlUtf8.erase(0, fileUrlUtf8.find_first_not_of(" \t"));
+            fileUrlUtf8.erase(fileUrlUtf8.find_last_not_of(" \t\r\n") + 1);
+
+            if (!fileUrlUtf8.empty()) {
+                // 将 UTF-8 的 URL 转为 wstring，确保 libcurl 处理不乱码
+                std::wstring wFileUrl = Utf8ToWstring(fileUrlUtf8);
+
+                // 下载文件内容
+                std::string fileData = DownloadTextFile(wFileUrl);
+
+                if (fileData.empty()) {
+                    if (debug == 1) {
+                        MessageBoxW(hWnd, (L"文件下载失败: " + wFileUrl).c_str(), L"Debug 错误", MB_ICONERROR);
+                    }
+                    continue;
+                }
+
+                // 构造绝对路径 (基于 RootPath)
+                fs::path targetPath = RootPath;
+                std::istringstream pathStream(currentPath);
+                std::string segment;
+                while (std::getline(pathStream, segment, '/')) {
+                    targetPath /= segment;
+                }
+
+                // 自动创建文件夹
+                fs::create_directories(targetPath.parent_path());
+
+                // 写入文件
+                std::ofstream outFile(targetPath, std::ios::binary);
+                if (outFile) {
+                    outFile.write(fileData.data(), fileData.size());
+                    outFile.close();
+
+                    if (debug == 1) {
+                        // 开发者模式下才弹出的详细进度
+                        // MessageBoxW(hWnd, (L"已更新: " + targetPath.wstring()).c_str(), L"提示", MB_ICONINFORMATION);
+                    }
+                }
+            }
+        }
+    }
+
+    MessageBoxW(hWnd, L"热更新已完成，部分更改将在重启后生效。", L"提示", MB_OK | MB_ICONINFORMATION | MB_TASKMODAL);
+}

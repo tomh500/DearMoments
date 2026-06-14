@@ -1,0 +1,8 @@
+C:\Users\jingy\source\repos\CS2MouseHook\x64\Release\yaml-cpp.dll
+C:\Users\jingy\source\repos\CS2MouseHook\CS2MouseHook\x64\Release\CS2Mouse.44582691.Up2Date
+C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\DearNextgen\opensource\CS2MouseHook\x64\Release\yaml-cpp.dll
+C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\DearNextgen\opensource\CS2MouseHook\CS2MouseHook\x64\Release\CS2Mouse.44582691.Up2Date
+C:\Users\jingy\Desktop\DearNextgen\opensource\CS2MouseHook\CS2MouseHook\x64\Release\CS2Mouse.44582691.Up2Date
+C:\Users\jingy\Desktop\DearNextgen\opensource\CS2MouseHook\x64\Release\yaml-cpp.dll
+C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\OpenDearNextgen\opensource\CS2MouseHook\x64\Release\yaml-cpp.dll
+C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg\OpenDearNextgen\opensource\CS2MouseHook\CS2MouseHook\x64\Release\CS2Mouse.44582691.Up2Date

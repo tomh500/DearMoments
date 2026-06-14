@@ -1,0 +1,24 @@
+// Are you a developer?
+//DM_UserMode
+//DM_DebugMode
+DM_DebugMode
+
+// Which output do you prefer?
+//DM_Output_Team                    Output to team
+DM_Output_Team
+
+// How will you use the scroll wheel?
+//DM_MouseWheel_Jump                Scroll Wheel Jump
+//DM_MouseWheel_Slot                Switch Item
+//DM_MouseWheel_Custom              Custom
+DM_MouseWheel_Jump
+
+// Special Spacebar Jump - Auto-Bhop
+//DM_AnlingMot_SpaceJump_Autobhop_Enable    Enable Auto-Bhop
+//DM_AnlingMot_SpaceJump_Autobhop_Disable    Disable Auto-Bhop
+DM_AnlingMot_SpaceJump_Autobhop_Enable
+
+// Which movement style do you use?
+//DM_AnlingMot_Style_Keyboard       Traditional, native movement experience
+//DM_AnlingMot_Style_JoySOCD        Joystick with SOCD capabilities, but cannot move on overlay pages
+DM_AnlingMot_Style_JoySOCD

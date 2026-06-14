@@ -1,0 +1,241 @@
+﻿// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_DM      ICON    "test.ico"
+IDI_SMALL   ICON    "test.ico"
+IDI_ICON1   ICON    "lty.ico"
+IDI_ICON3   ICON    "test.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_DM MENU
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        
+        POPUP "安装&&删除CFG"
+        BEGIN
+            MENUITEM "更新并安装CFG", IDM_INSTALL_CFG
+            MENUITEM "清空autoexec",                  IDM_CLEAR_AUTOEXEC
+            MENUITEM "清空autoexec并恢复默认按键绑定",         IDM_CLEAR_AND_RESET_BINDINGS
+        END
+    POPUP "用户空间"
+    BEGIN
+    MENUITEM "打开用户空间文件夹", IDM_USERSPACE_FOLDER
+    MENUITEM "快速编辑CFG用户配置", IDM_USERSPACE_EDITOR
+ 
+    END
+
+        MENUITEM "退出(&X)",                      IDM_EXIT
+    END
+    POPUP "工具(&T)"
+    BEGIN
+        MENUITEM "音乐播放器",                       IDM_MUSICPLAYER_INIT
+  //      MENUITEM "自定义道具投掷",                     IDM_ITEMS_THROW_FOLDER
+     //   MENUITEM "自动旋转视角计算器", IDM_FOV_CL
+        MENUITEM "屏幕分辨率等修改", IDM_SCREENTOOLS
+        MENUITEM "应用市场", IDM_APPSTORE
+    POPUP "ConsoleUI"
+    BEGIN
+    MENUITEM "ShowConsoleUI", IDM_ShowConsoleUI
+    MENUITEM "HideConsoleUI", IDM_HideConsoleUI
+
+    END
+       
+     //   MENUITEM "模组市场",                        IDM_OPEN_MOD_MARKET
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "检查更新",               IDM_UPDATE_CHECK
+   //   MENUITEM  "教程阅读", IDM_HELPFILE
+   //     MENUITEM "道具轮盘站位图", IDM_OPEN_TEACH
+        MENUITEM "关于 ...",                  IDM_ABOUT
+    END
+
+   // POPUP "English Menu"
+//    BEGIN
+//	MENUITEM "Update and Install CFG", IDM_INSTALL_CFG_EN
+ //   MENUITEM "Clear Autoexec (Uninstall)", IDM_CLEAR_AUTOEXEC
+ //   END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_DM ACCELERATORS
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 220, 130
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 DearMoments监听器"
+FONT 9, "MS Shell Dlg"
+BEGIN
+// ===== 图标（支持 Alpha）=====
+CONTROL "", IDI_DM, STATIC,
+        SS_ICON | WS_VISIBLE,
+        12, 12, 20, 20
+
+// ===== 标题 =====
+LTEXT "DearMoments监听器", IDC_STATIC, 40, 12, 160, 10, SS_NOPREFIX
+LTEXT "版权所有 (c) 2026", IDC_STATIC, 40, 26, 160, 8
+
+// 第1个控件：从 40 开始，宽度 55
+AUTOCHECKBOX "开机自启", IDC_AUTOSTART_CHECK, 40, 40, 40, 10
+
+// 第2个控件：X = 40 + 55 + 5 = 100
+// 原来宽度 110 太长了，缩减到 65 刚好够显示文本
+AUTOCHECKBOX "集成急停", IDC_QUICKSTOP_CHECK, 80, 40, 40, 10
+
+// 第3个控件：X = 100 + 65 + 5 = 170
+// 紧随其后
+AUTOCHECKBOX "覆盖的TEXTGUI", IDC_TEXTGUI_CHECK, 120, 40, 60, 10
+
+// ===== 版本信息（前缀 + 值，分开）=====
+LTEXT "监听器版本号：", IDC_STATIC,        40, 56, 80, 8
+LTEXT "",                IDC_VER_LISTENER, 120, 56, 80, 8
+
+LTEXT "产品文件版本号：", IDC_STATIC,      40, 66, 80, 8
+LTEXT "",                IDC_VER_PRODUCT,  120, 66, 80, 8
+
+LTEXT "必要服务版本号：", IDC_STATIC,      40, 76, 80, 8
+LTEXT "",                IDC_VER_CORE,     120, 76, 80, 8
+
+LTEXT "通信服务版本号：", IDC_STATIC,      40, 86, 80, 8
+LTEXT "",                IDC_VER_COMM,     120, 86, 80, 8
+
+// ===== 协议 =====
+LTEXT "使用本产品代表您同意", IDC_STATIC, 40, 104, 100, 8
+LTEXT "协议", IDC_LINK_AGREEMENT, 115, 104, 40, 9, SS_NOTIFY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKGROUND          BITMAP                  "background.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_APP_TITLE           "挚爱的时刻CFG-Listener"
+    IDC_DM                  "DM"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
+IDR_ENCRYPT_KEY RCDATA "encrypt.sq"

@@ -1,0 +1,151 @@
+text "//请使用主程序配套的编辑工具编辑本文件，而不是在这里手动编辑"
+
+text "//------------------------------------------------------------------------"
+text "//----------------------------开发者模式----------------------------"
+text "//------------------------------------------------------------------------"
+func "开发者模式" "选择是否启用开发者模式" "DearMoments_UserMode" 2
+    "DearMoments_UserMode" "用户模式"
+    "DearMoments_DebugMode" "开发者模式"
+
+text "//------------------------------------------------------------------------"
+text "//-------------------------------输出文本位置------------------------------"
+text "//------------------------------------------------------------------------"
+text "//下列选项是用于修改文本的输出位置，也就是开关模块信息和输出信息出现的地方"
+text "//"
+text "//DearMoments_TextOutput_Team      输出到队伍[输出到队伍]"
+text "//DearMoments_TextOutput_All       输出到全体[输出到全体]"
+text "//DearMoments_TextOutput_Echo      输出到控制台[输出到控制台]"
+text "//DearMoments_TextOutput_Null      不输出[不输出]"
+func "输出文本位置" "选择信息输出的位置" "DearMoments_TextOutput_Echo" 4
+    "DearMoments_TextOutput_Team" "输出到队伍"
+    "DearMoments_TextOutput_All" "输出到全体"
+    "DearMoments_TextOutput_Echo" "输出到控制台"
+    "DearMoments_TextOutput_Null" "不输出"
+
+
+text "//如果你不知道这是什么，请保持禁用"
+text "//"
+text "//DearMoments_Desubtick_Enable     全局启用Desubtick，使得手感更像CSGO [Desubtick]"
+text "//DearMoments_Desubtick_Disable    全局禁用Desubtick，CS2原汁原味手感 [%NULL%]"
+func "Desubtick 系统" "消除掉subtick的时序错误，如果你不知道这是什么，请保持禁用" "DearMoments_Desubtick_Enable" 2
+    "DearMoments_Desubtick_Enable" "启用 Desubtick，"
+    "DearMoments_Desubtick_Disable" "禁用 Desubtick"
+
+
+text ""
+text "//选择滚轮跳模式"
+text "//MoMot_MW_A        正常滚轮跳 [%extern A模式%]"
+text "//MoMot_MW_B        Desubtick滚轮跳 [%extern B模式%]"
+text "//MoMot_MW_C        MouseXY滚轮跳 [%extern C模式%]"
+text "//MoMot_MW_D        JumpBug滚轮跳 [%extern D模式%]"
+func "滚轮跳方式" "选择滚轮跳模式" "MoMot_MW_B" 4
+    "MoMot_MW_A" "正常滚轮跳"
+    "MoMot_MW_B" "Desubtick 滚轮跳"
+    "MoMot_MW_C" "MouseXY 滚轮跳"
+    "MoMot_MW_D" "JumpBug 滚轮跳"
+
+
+text "//移动Api"
+text "//MoMot_InputMode_key   键盘Api [%extern api:键盘%]"
+text "//MoMot_InputMode_JoyPure   摇杆 [%extern api:摇杆%]"
+text "//MoMot_InputMode_joySOCD   摇杆SOCD [%extern api:摇杆SOCD%]"
+text "//MoMot_InputMode_joySensitivity   摇杆灵敏度[%extern api:摇杆灵敏度%]"
+text "//MoMot_InputMode_joySensitivitySOCD   摇杆灵敏度SOCD[%extern api:摇杆灵敏度SOCD%]"
+func "移动Api" "选择你的移动Api" "MoMot_InputMode_joyPure" 5
+    "MoMot_InputMode_key" "键盘"
+    "MoMot_InputMode_joyPure" "摇杆"
+    "MoMot_InputMode_joySOCD" "含有SOCD能力的摇杆"
+    "MoMot_InputMode_joySensitivity" "摇杆灵敏度"
+    "MoMot_InputMode_joySensitivitySOCD" "含有SOCD能力的摇杆灵敏度"
+
+text ""
+text "//Api发送方式，仅当使用摇杆系列Api才能使用混合Api发送，否则不仅无效，还可能出现BUG"
+text "//MoMot_ApiSend_Single     单调发送 [%NULL%]"
+text "//MoMot_ApiSend_multi      混合发送 [移动API混合发送]"
+func "混合Api发送" "测试功能，混合摇杆和键盘API" "MoMot_ApiSend_Single" 2
+    "MoMot_ApiSend_Single" "单调发送"
+    "MoMot_ApiSend_multi" "混合发送"
+
+text ""
+
+text ""
+text "//你可以轻松选择移动方式，随心所欲辅助你的急停"
+text ""
+text "//前后移动方式，在输入Api为摇杆系列，本选项仅修改是否启用半自动急停（双键）"
+text "//MoMot_fb_Normal       正常移动 [%NULL%]"
+text "//MoMot_fb_SOCD         后覆盖移动 [%extern X轴SOCD%]"
+text "//MoMot_fb_Nullbind     单次后覆盖 [%extern X轴Nullbind%]"
+
+func "前后移动方式" "选择前后方向的移动模式，在输入Api为摇杆系列，本选项仅修改是否启用半自动急停（双键）" "MoMot_fb_SOCD" 3
+    "MoMot_fb_Normal" "正常移动[%NULL%]"
+    "MoMot_fb_SOCD" "后覆盖移动（Snaptap）"
+    "MoMot_fb_NullBind" "单次后覆盖移动（Nullbind）"
+
+text ""
+text "//左右移动方式，在输入Api为摇杆系列，本选项仅修改是否启用半自动急停（双键）"
+text "//MoMot_rl_Normal       正常移动 [%NULL%]"
+text "//MoMot_rl_SOCD         后覆盖移动 [%extern Z轴SOCD%]"
+text "//MoMot_rl_Nullbind     单次后覆盖 [%extern Z轴Nullbind%]"
+
+func "左右移动方式" "选择左右方向的移动模式，在输入Api为摇杆系列，本选项仅修改是否启用半自动急停（双键）" "MoMot_rl_SOCD" 3
+    "MoMot_rl_Normal" "正常移动"
+    "MoMot_rl_SOCD" "后覆盖移动（Snaptap）"
+    "MoMot_rl_NullBind" "单次后覆盖移动（Nullbind）"
+
+
+text ""
+text "//--------------------------------------------------------------------------"
+text ""
+text "//------------------------------------------------------------------------"
+text "//--------------------------------滚轮功能相关-----------------------------"
+text "//------------------------------------------------------------------------"
+text "//"
+text "//你可以分离控制你的上下滚轮绑定，轻松关闭滚轮跳！"
+text ""
+text "//DearMoments_Mwheelup_Jump        上滚轮跳 [上滚轮跳 *%jump->MoMot_MW_A%*]"
+text "//DearMoments_Mwheelup_slot        上滚轮切换物品栏 [%NULL%]"
+func "上滚轮 功能" "选择上滚轮使用时的功能" "DearMoments_Mwheelup_Jump" 3
+    "DearMoments_Mwheelup_Jump" "上滚轮跳 "
+    "DearMoments_Mwheelup_slot" "上滚轮切换物品栏"
+    "DearMoments_Mwheelup_custom" "自定义 "
+
+text ""
+text "//DearMoments_Mwheeldown_Jump     下滚轮跳 [下滚轮跳  *%jump->MoMot_MW_A%*]"
+text "//DearMoments_Mwheeldown_slot      下滚轮切换物品栏 [%NULL%]"
+func "下滚轮 功能" "选择下滚轮使用时的功能" "DearMoments_Mwheeldown_Jump" 3
+    "DearMoments_Mwheeldown_Jump" "下滚轮跳"
+    "DearMoments_Mwheeldown_slot" "下滚轮切换物品栏"
+    "DearMoments_Mwheeldown_custom" "自定义"
+
+text "//------------------------------------------------------------------------"
+text "//------------------------------------------------------------------------"
+text "//--------------------------------声音功能相关-----------------------------"
+text "//------------------------------------------------------------------------"
+text "//这玩意虽然不要钱，但请酌情使用，否则会很喧闹"
+text ""
+text "//DearMoments_RP_KnifeSnd_0            不替换切刀声音"
+text "//DearMoments_RP_KnifeSnd_1            替换切刀声音为短剑 [切刀音效替换 *短剑*]"
+text "//DearMoments_RP_KnifeSnd_2            替换切刀声音为折刀 [切刀音效替换 *折刀*]"
+text "//DearMoments_RP_KnifeSnd_3            替换切刀声音为双匕 [切刀音效替换 *双匕*]"
+text "//DearMoments_RP_KnifeSnd_4            替换切刀声音为锯齿 [切刀音效替换 *锯齿*]"
+text "//DearMoments_RP_KnifeSnd_5            替换切刀声音为折叠 [切刀音效替换 *折叠刀*]"
+text "//DearMoments_RP_KnifeSnd_6            替换切刀声音为博伊 [切刀音效替换 *博伊刀*]"
+text "//DearMoments_RP_KnifeSnd_7            替换切刀声音为蝴蝶 [切刀音效替换 *蝴蝶刀*]"
+func "切刀声音替换" "这玩意虽然不要钱，但请酌情使用，否则会很喧闹" "DearMoments_RP_KnifeSnd_1" 8
+    "DearMoments_RP_KnifeSnd_0" "不替换切刀声音"
+    "DearMoments_RP_KnifeSnd_1" "替换切刀声音为短剑"
+    "DearMoments_RP_KnifeSnd_2" "替换切刀声音为折刀"
+    "DearMoments_RP_KnifeSnd_3" "替换切刀声音为双匕"
+    "DearMoments_RP_KnifeSnd_4" "替换切刀声音为锯齿"
+    "DearMoments_RP_KnifeSnd_5" "替换切刀声音为折叠"
+    "DearMoments_RP_KnifeSnd_6" "替换切刀声音为博伊"
+    "DearMoments_RP_KnifeSnd_7" "替换切刀声音为蝴蝶"
+
+text ""
+text "//轻松使用声音提示你开关模块"
+text ""
+text "//DearMoments_SoundTips_Enable         开启声音提示 [输出到音频流]"
+text "//DearMoments_SoundTips_Disable        关闭声音提示 [%NULL%]"
+func "声音提示" "开启或关闭声音提示" "DearMoments_SoundTips_Enable" 2
+    "DearMoments_SoundTips_Enable" "开启声音提示"
+    "DearMoments_SoundTips_Disable" "关闭声音提示"

@@ -1,0 +1,87 @@
+LCFG_VERSION(1)
+setExecPath("Summer/src/CS2/main/DM/Features/Modules/SmartActive/actions/maps/dust2/t_spawn01_to_rushlong")
+function AGR()
+  src("turnright 0.22 0 0")
+end
+
+function MR()
+  right()
+end
+
+function AGL()
+  src("turnleft 0.22 0 0")
+end
+
+function ML()
+  left()
+end
+
+function JB()
+  jumpbug()
+end
+
+local co_AGR = coroutine.create(AGR)
+local co_MR = coroutine.create(MR)
+local co_AGL = coroutine.create(AGR)
+local co_ML = coroutine.create(MR)
+local co_JB = coroutine.create(JB)
+lockMouse()
+wasdCancel()
+src("setpos -332.000000 -754.000000 80")
+setAngle( 1.034063,29.322248)
+slot3()
+forward()
+sleep(50)
+forward(-1)
+jump()
+right()
+src("turnright 0.4 0 0 ")
+sleep(20)
+src("turnright -1 0 0")
+sleep(37)
+right(-1)
+
+left()
+src("turnleft 0.5 0 0")
+jump()
+sleep(39)
+src("turnleft -1 0 0;left -1009 0 0 ")
+
+right()
+src("turnright 0.2 0 0")
+jump()
+sleep(41)
+src("turnright -1 0 0;right -1009 0 0 ")
+left()
+src("turnleft 0.15 0 0")
+jumpbug()
+sleep(42)
+src("turnleft -1 0 0;left -1009 0 0 ")
+
+coroutine.resume(co_AGR)
+coroutine.resume(co_MR)
+sleep(5)
+jumpbug()
+sleep(39)
+src("turnright -1 0 0;right -1009 0 0 ")
+
+
+src("echo flag;+left;turnleft 0.3 0 0")
+sleep(9)
+jumpbug()
+sleep(43)
+src("-left;turnleft -1 0 0 ")
+
+src("echo flag;+right;turnright 0.36 0 0")
+sleep(5)
+jump()
+sleep(23)
+src("-right;turnright -1 0 0 ")
+forward()
+sleep(50)
+setAngle(-2.485937,126.080544)
+sleep(76)
+setAngle(0.154063,38.366547)
+slot2()
+slot1()
+unlockMouse()
