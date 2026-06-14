@@ -1,0 +1,26 @@
+# Visual Studio 临时文件
+*.obj
+*.pdb
+*.ilk
+*.tlog
+*.idb
+*.exp
+*.lib
+*.log
+*.iobj
+*.ipdb
+*.res
+*.lastbuildstate
+*.Build.CppClean.log
+*.vcxproj.FileListAbsolute.txt
+*.ifc
+*.ifc.d.json
+*.module.json
+
+# 文件夹级忽略
+.vs/
+x64/
+Release/
+Debug/
+bin/
+obj/
