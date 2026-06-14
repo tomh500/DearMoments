@@ -53,7 +53,7 @@
  本项目托管于 GitHub，请确保仅克隆 `OpenDear` 分支以获取离线开源版本：
 
  ```bash
- git clone -b OpenDear [https:github.com/tomh500/DearMoments.git](https:github.com/tomh500/DearMoments.git)
+ git clone -b OpenDear https://github.com/tomh500/DearMoments.git
  cd DearMoments
 ```
  ## 4. 构建流程
