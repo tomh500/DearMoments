@@ -59,6 +59,21 @@
     </div>
   </div>
 </div>
+
+<div class="watermark-overlay">
+    <div class="watermark-text">已停止支持</div>
+</div>
+
+<div id="announcementModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;display:flex;justify-content:center;align-items:center;">
+    <div class="card" style="max-width:600px;padding:30px;">
+        <h3>重要公告</h3>
+        <p>我们遗憾地通知各位，DearMoments 全系列产品已于今日正式停止支持。相关源代码已作为 OpenDear 客户端发布至仓库。本次发布不包含已构建的二进制可执行文件，后续信息请关注我们的官方网站。同时，DearMoments 客户端的验证服务器将在近期关闭，届时将无法继续使用该系列产品。我们建议您自行克隆 OpenDear 客户端源代码并进行本地构建。</p>
+        <p>OpenDear 客户端为完全开源且可脱机运行的项目。我们已在代码层面完成初步简化逻辑，允许您直接构建并获得最小可用版本。OpenDear 客户端遵循 GPL 3.0 协议，您可以自由使用、修改和分发代码，甚至用于商业用途。但请注意其核心原则——“强传染性”：任何包含或衍生自 GPL 3.0 代码的作品，均必须开源。</p>
+        <p><strong>仓库地址：</strong> <a href="https://github.com/tomh500/DearMoments" target="_blank">https://github.com/tomh500/DearMoments</a></p>
+        <button id="closeAnnouncement" class="cta">确定</button>
+    </div>
+</div>
+
 </head>
 
 <body>
@@ -88,11 +103,11 @@
       <p class="small">下一代全新混动CFG，就像《反恐精英》里的类固醇一样</p>
 
 <div style="margin-top:16px" class="cta-group" role="region" aria-label="下载与社区链接">
-  <a class="cta" id="downloadBtn" href="https://github.com/tomh500/DearMoments/releases" target="_blank" rel="noopener noreferrer">
+  <a class="cta" id="downloadBtn" href="https://github.com/tomh500/DearMoments" target="_blank" rel="noopener noreferrer">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
     </svg>
-    下载 DearNextgen
+    前往开源仓库
   </a>
 
   <a class="cta secondary" id="communityBtn" href="https://discord.gg/rcAGYqnX4x" target="_blank" rel="noopener noreferrer" title="加入社区 Discord">
@@ -462,6 +477,23 @@
 
   <script src="main.js"></script>
     <script src="sort-features.js"></script>
+    <script>  document.addEventListener('DOMContentLoaded', () => {
+    // 1. 处理公告关闭
+    const annModal = document.getElementById('announcementModal');
+    const closeBtn = document.getElementById('closeAnnouncement');
+    
+    closeBtn.addEventListener('click', () => {
+        annModal.style.display = 'none';
+    });
+
+    // 2. 修改标题逻辑 (假设标题在 h1 标签内)
+    const titleElements = document.querySelectorAll('h1, h3');
+    titleElements.forEach(el => {
+        if (el.textContent.includes('DearNextgen')) {
+            el.innerHTML = '<span class="title-strikethrough">DearNextgen</span> OpenDear';
+        }
+    });
+});</script>
 </body>
 
 </html>

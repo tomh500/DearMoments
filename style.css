@@ -731,3 +731,37 @@ body.mobile .cta {
     40% { transform: translateY(-5px); }
     60% { transform: translateY(-3px); }
 }
+
+
+/* 停止支持公告 */
+
+/* 水印样式 */
+.watermark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 穿透点击 */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    opacity: 0.15; /* 调整透明度 */
+}
+
+.watermark-text {
+    font-size: 8rem;
+    color: red;
+    transform: rotate(-30deg);
+    white-space: nowrap;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* 标题删除线样式 */
+.title-strikethrough {
+    text-decoration: line-through;
+    color: #888;
+}

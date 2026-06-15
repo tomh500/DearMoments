@@ -1,0 +1,21 @@
+{
+  "__comments": {
+    "tips": "这里是配置文件的说明，帮助你快速了解每个选项的作用",
+    "match": "新版本已弃用该选项，请保持true",
+    "mvp": "新版本已弃用该选项，请保持true",
+    "vol": "播放音量，取值范围vol∈(0.0 , 1.0]，当vol取1.0时，为音频原始音量，如需更大音量，可在外部用 ffmpeg 放大后再加载",
+    "ogg": "音频格式是否使用 .ogg格式，如果不是，则使用wav格式，如果你的音频无法正常播放，请使用ffmpeg进行正确转换",
+    "custom_musickit": "是否启用自定义音乐包逻辑，请酌情使用本功能，如果你不需要特定的某个音乐文件，那么删除单个文件即可",
+    "custom_flashbang": "是否启用闪光叠加页面，如果开启，当玩家因闪光弹失去视野，会覆盖渲染自定义图片到屏幕上层",
+    "low_memory": "是否开启低内存模式，开启此选项会以大量硬盘io为代价，降低内存占用",
+    "show_mvp": "是否展示MVP信息板"
+  },
+  "match": true,
+  "mvp": true,
+  "vol": 0.88,
+  "ogg": false,
+  "custom_musickit": true,
+  "custom_flashbang": false,
+  "low_memory": false,
+  "show_mvp": false
+}
